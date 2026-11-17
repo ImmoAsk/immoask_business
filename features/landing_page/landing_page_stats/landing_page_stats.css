@@ -1,0 +1,29 @@
+.lp-stats-stats {
+  background: var(--deep);
+  color: #fff;
+  border-radius: 44px;
+  padding: 70px 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  text-align: center;
+}
+
+.lp-stats-stats b {
+  display: block;
+  font: 800 clamp(52px, 8vw, 104px) / 1 var(--dsp);
+  letter-spacing: -0.04em;
+  color: #fff;
+}
+
+.lp-stats-stats span {
+  color: #9cc9e3;
+  font-weight: 500;
+}
+
+@media (max-width: 700px) {
+  .lp-stats-stats {
+    grid-template-columns: 1fr;
+    padding: 50px 24px;
+  }
+}

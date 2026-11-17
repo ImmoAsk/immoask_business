@@ -1,0 +1,57 @@
+.lp-cta-final {
+  background: linear-gradient(135deg, var(--blue), var(--deep));
+  border-radius: 48px;
+  padding: 90px 40px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.lp-cta-final::before,
+.lp-cta-final::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 60px solid rgba(255, 255, 255, 0.07);
+  animation: lp-cta-kf-ring 9s ease-in-out infinite alternate;
+}
+
+.lp-cta-final::before {
+  width: 420px;
+  height: 420px;
+  left: -120px;
+  top: -160px;
+}
+
+.lp-cta-final::after {
+  width: 340px;
+  height: 340px;
+  right: -90px;
+  bottom: -140px;
+  animation-delay: -4s;
+}
+
+@keyframes lp-cta-kf-ring {
+  to {
+    transform: scale(1.18);
+  }
+}
+
+.lp-cta-final h2 {
+  position: relative;
+  max-width: 14ch;
+  margin: 0 auto 34px;
+}
+
+.lp-cta-final p {
+  position: relative;
+  margin: -14px auto 34px;
+  color: #d5ebf8;
+  font-size: 19px;
+}
+
+.lp-cta-actions {
+  justify-content: center;
+  position: relative;
+}

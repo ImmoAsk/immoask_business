@@ -1,0 +1,239 @@
+.lp-platforms-section {
+  padding-bottom: 40px;
+}
+
+.lp-platforms-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.lp-platforms-mock {
+  position: relative;
+  padding: 0 34px 44px 0;
+}
+
+.lp-platforms-laptop {
+  border-radius: 22px 22px 8px 8px;
+  background: var(--surf);
+  border: 8px solid var(--deep);
+  aspect-ratio: 16 / 10;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  overflow: hidden;
+  box-shadow: 0 40px 70px -34px rgba(6, 48, 74, 0.55);
+}
+
+.lp-platforms-sidebar {
+  background: var(--deep);
+  display: grid;
+  gap: 12px;
+  padding: 18px 14px;
+  align-content: start;
+}
+
+.lp-platforms-sidebar i {
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.lp-platforms-sidebar i.sidebarActive {
+  background: var(--blue);
+}
+
+.lp-platforms-main {
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.lp-platforms-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.lp-platforms-kpis div {
+  background: var(--tint);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font: 800 20px var(--dsp);
+  letter-spacing: -0.02em;
+}
+
+.lp-platforms-kpis small {
+  display: block;
+  font: 500 11px var(--txt);
+  color: var(--mut);
+  letter-spacing: 0;
+}
+
+.lp-platforms-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 130px;
+  background: var(--tint);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.lp-platforms-chart i {
+  flex: 1;
+  height: var(--h);
+  background: var(--blue);
+  border-radius: 6px 6px 0 0;
+  transform-origin: bottom;
+  animation: lp-platforms-kf-grow 3.6s ease-in-out infinite alternate;
+}
+
+.lp-platforms-chart i:nth-child(2n) {
+  animation-delay: -1.2s;
+}
+
+.lp-platforms-chart i:nth-child(3n) {
+  animation-delay: -2.4s;
+  opacity: 0.75;
+}
+
+@keyframes lp-platforms-kf-grow {
+  from {
+    transform: scaleY(0.4);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.lp-platforms-phone {
+  position: absolute;
+  right: -6px;
+  bottom: -4px;
+  width: 172px;
+  border-radius: 30px;
+  border: 6px solid var(--deep);
+  background: var(--surf);
+  padding: 26px 14px 16px;
+  box-shadow: 0 30px 50px -20px rgba(6, 48, 74, 0.55);
+  animation: lp-platforms-kf-float 6s ease-in-out infinite;
+}
+
+@keyframes lp-platforms-kf-float {
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.lp-platforms-phone b {
+  font: 800 22px var(--dsp);
+  letter-spacing: -0.02em;
+}
+
+.lp-platforms-phone small {
+  font-size: 12px;
+  color: var(--mut);
+  font-weight: 600;
+}
+
+.lp-platforms-phoneBar {
+  margin: 10px 0 12px;
+}
+
+.lp-platforms-phoneRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--tint);
+  border-radius: 12px;
+  padding: 8px 10px;
+  margin-top: 8px;
+}
+
+.lp-platforms-phoneRow u {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+
+.lp-platforms-label {
+  position: absolute;
+  background: var(--blue);
+  color: #fff;
+  font: 600 12px var(--txt);
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.lp-platforms-webLabel {
+  top: -12px;
+  left: 24px;
+  z-index: 1;
+}
+
+.lp-platforms-mobileLabel {
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.lp-platforms-list {
+  display: grid;
+  gap: 16px;
+}
+
+.lp-platforms-item {
+  display: flex;
+  gap: 20px;
+  padding: 28px;
+  border-radius: 28px;
+  background: var(--tint);
+  transition:
+    transform 0.3s,
+    background 0.3s;
+}
+
+.lp-platforms-item:hover {
+  transform: translateX(6px);
+  background: var(--tint2);
+}
+
+.lp-platforms-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--blue);
+  display: grid;
+  place-items: center;
+  flex: none;
+  color: #fff;
+}
+
+.lp-platforms-icon svg {
+  width: 24px;
+}
+
+.lp-platforms-item h3 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.lp-platforms-item p {
+  margin-top: 8px;
+  color: var(--mut);
+  font-size: 16px;
+}
+
+@media (max-width: 900px) {
+  .lp-platforms-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}

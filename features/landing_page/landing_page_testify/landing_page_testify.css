@@ -1,0 +1,49 @@
+.lp-testify-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.lp-testify-grid figure {
+  padding: 34px;
+  border-radius: 30px;
+  background: var(--tint);
+}
+
+.lp-testify-grid blockquote {
+  font: 600 22px/1.3 var(--dsp);
+  letter-spacing: -0.02em;
+}
+
+.lp-testify-grid figcaption {
+  margin-top: 26px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.lp-testify-grid figcaption i {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font: 700 16px var(--dsp);
+  font-style: normal;
+}
+
+.lp-testify-grid figcaption small {
+  display: block;
+  color: var(--mut);
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .lp-testify-grid {
+    grid-template-columns: 1fr;
+  }
+}

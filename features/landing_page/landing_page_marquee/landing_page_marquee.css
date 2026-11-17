@@ -1,0 +1,35 @@
+.lp-marquee-marquee {
+  border-block: 1px solid var(--line);
+  padding: 22px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.lp-marquee-track {
+  display: inline-flex;
+  gap: 56px;
+  animation: lp-marquee-kf-marquee 30s linear infinite;
+  font: 700 26px var(--dsp);
+  letter-spacing: -0.02em;
+  color: var(--mut);
+}
+
+.lp-marquee-track span {
+  display: inline-flex;
+  align-items: center;
+  gap: 56px;
+}
+
+.lp-marquee-track span::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+
+@keyframes lp-marquee-kf-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}

@@ -1,0 +1,278 @@
+/* Design tokens + primitives shared by every landing section. */
+.lp-root {
+  --blue: #0b84c6;
+  --blue-d: #075f93;
+  --deep: #06304a;
+  --tint: #eaf5fc;
+  --tint2: #d5ebf8;
+  --bg: #fff;
+  --surf: #fff;
+  --ink: #0a2433;
+  --mut: #5b7486;
+  --line: #dce9f2;
+  --on-blue: #fff;
+  --dsp: var(--font-landing-display), "Figtree", system-ui, sans-serif;
+  --txt: var(--font-landing-text), system-ui, sans-serif;
+
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 17px/1.55 var(--txt);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Dark theme: driven by <html data-theme="dark"> (see lib/utils/theme). */
+:root[data-theme="dark"] .lp-root {
+  color-scheme: dark;
+  --blue: #2ba3e3;
+  --blue-d: #0b84c6;
+  --deep: #031521;
+  --tint: #0a2a3f;
+  --tint2: #0f3750;
+  --bg: #05192a;
+  --surf: #0a2639;
+  --ink: #e8f3fa;
+  --mut: #8fb0c4;
+  --line: #133a54;
+}
+
+/* No JS / no stored choice yet: follow the OS. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .lp-root {
+    color-scheme: dark;
+    --blue: #2ba3e3;
+    --blue-d: #0b84c6;
+    --deep: #031521;
+    --tint: #0a2a3f;
+    --tint2: #0f3750;
+    --bg: #05192a;
+    --surf: #0a2639;
+    --ink: #e8f3fa;
+    --mut: #8fb0c4;
+    --line: #133a54;
+  }
+}
+
+/* Header language / theme switches */
+.lp-switch {
+  display: inline-grid;
+  place-items: center;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--tint);
+  color: var(--blue-d);
+  font: 700 14px var(--txt);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.lp-switch:hover {
+  background: var(--tint2);
+}
+
+.lp-switch svg {
+  width: 18px;
+  height: 18px;
+}
+
+html:has(.lp-root) {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 116px);
+}
+
+.lp-root a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.lp-root :focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.lp-root h1,
+.lp-root h2,
+.lp-root h3 {
+  font-family: var(--dsp);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+.lp-root h2 {
+  font-size: clamp(34px, 5vw, 58px);
+  font-weight: 800;
+}
+
+.lp-wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.lp-section {
+  padding: 120px 0;
+}
+
+.lp-sectionFlushTop {
+  padding-top: 0;
+}
+
+.lp-head {
+  margin-bottom: 56px;
+  max-width: 720px;
+}
+
+.lp-head p {
+  margin-top: 16px;
+  color: var(--mut);
+  font-size: 19px;
+}
+
+/* buttons */
+.lp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 26px;
+  border-radius: 999px;
+  font: 600 16px var(--txt);
+  border: 0;
+  cursor: pointer;
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s,
+    background 0.25s;
+}
+
+.lp-btn svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.25s;
+}
+
+.lp-btn:hover svg {
+  transform: translateX(3px);
+}
+
+.lp-btnPrimary {
+  background: var(--blue);
+  color: #fff !important;
+  box-shadow: 0 10px 30px -10px var(--blue);
+}
+
+.lp-btnPrimary:hover {
+  transform: translateY(-2px);
+  background: var(--blue-d);
+}
+
+.lp-btnGhost {
+  background: var(--tint);
+  color: var(--blue-d) !important;
+}
+
+.lp-btnGhost:hover {
+  background: var(--tint2);
+}
+
+.lp-btnWhite {
+  background: #fff;
+  color: var(--blue-d) !important;
+}
+
+.lp-btnWhite:hover {
+  transform: translateY(-2px);
+}
+
+.lp-btnGlass {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff !important;
+}
+
+.lp-ctaRow {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* animated progress bar used by phone mocks */
+.lp-bar {
+  height: 6px;
+  border-radius: 6px;
+  background: var(--tint2);
+  overflow: hidden;
+  margin: 14px 0 18px;
+}
+
+.lp-bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--blue);
+  border-radius: 6px;
+  animation: lp-kf-fill 9s infinite;
+}
+
+@keyframes lp-kf-fill {
+  0%,
+  8% {
+    width: 0;
+  }
+  22%,
+  92% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+/*
+ * Scroll reveal — toggled by <LandingRevealObserver />.
+ * Uses an animation on `translate` (not `transform`/`transition`) with :where() specificity,
+ * so it never fights each component's own hover transforms and transitions.
+ */
+:where(.lp-root) [data-reveal] {
+  opacity: 0;
+  translate: 0 26px;
+}
+
+:where(.lp-root) [data-reveal="in"] {
+  opacity: 1;
+  translate: none;
+  animation: lp-kf-reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) var(--reveal-delay, 0ms) both;
+}
+
+@keyframes lp-kf-reveal {
+  from {
+    opacity: 0;
+    translate: 0 26px;
+  }
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-root *,
+  .lp-root *::before,
+  .lp-root *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .lp-root [data-reveal] {
+    opacity: 1 !important;
+    translate: none !important;
+  }
+
+  .lp-bar i {
+    width: 100%;
+  }
+}
