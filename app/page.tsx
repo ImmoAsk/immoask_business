@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { LandingPageLocalized } from "@/features/landing_page";
 
 export const metadata: Metadata = {
-  title: "ImmoAsk Business — Gérez plus intelligemment, où que vous soyez",
+  title: "ImmoAsk Business — Votre patrimoine immobilier mérite une gestion plus intelligente",
   description:
-    "Gestion locative pour les propriétaires, la diaspora et les professionnels de l'immobilier : Mobile Money, quittances WhatsApp, virements automatiques.",
+    "La gestion immobilière intelligente, où que vous soyez. La solution pensée pour les propriétaires de la diaspora et les professionnels de l'immobilier ambitieux.",
 };
 
 export default function Home() {

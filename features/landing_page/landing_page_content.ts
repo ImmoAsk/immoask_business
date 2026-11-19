@@ -68,16 +68,13 @@ export const landingPageContent: LandingPageContent = {
   },
 
   hero: {
-    title: "Gérez plus intelligemment.",
-    highlight: "Où que vous soyez.",
-    description: "Pour les propriétaires, la diaspora et les professionnels de l'immobilier.",
+    title: "Votre patrimoine immobilier mérite",
+    highlight: "une gestion plus intelligente.",
+    description:
+      "La gestion immobilière intelligente, où que vous soyez. La solution pensée pour les propriétaires de la diaspora et les professionnels de l'immobilier ambitieux.",
     actions: [
       { label: "Démarrer gratuitement", href: landing_page_cta_link, variant: "primary", withArrow: true },
       { label: "Voir la démo", href: landing_page_cta_link, variant: "ghost" },
-    ],
-    platforms: [
-      { icon: "phone", label: "Application mobile" },
-      { icon: "monitor", label: "Plateforme web" },
     ],
     trustItems: ["Gratuit sans engagement", "Contrats conformes aux normes fiscales"],
     phone: {
@@ -140,7 +137,7 @@ export const landingPageContent: LandingPageContent = {
       { before: "Loyers impayés", after: "Recouvrement assuré par ImmoAsk" },
       { before: "Retards de loyer", after: "Virement chaque 5 du mois" },
       { before: "Devis gonflés", after: "Photos avant et après" },
-      { before: "Flou juridique", after: "Contrats conformes OTR" },
+      { before: "Flou juridique", after: "Contrats conformes aux normes fiscales" },
     ],
   },
 
@@ -225,7 +222,7 @@ export const landingPageContent: LandingPageContent = {
         plans: [
           {
             name: "Business",
-            price: "0,49999",
+            price: "0,79999",
             priceUnit: "USD par contrat, par mois",
             priceUnitOnNewLine: true,
             description: "De 1 à 100 contrats de location.",
@@ -234,7 +231,7 @@ export const landingPageContent: LandingPageContent = {
           },
           {
             name: "Business Plus",
-            price: "0,39999",
+            price: "0,59999",
             priceUnit: "USD par contrat, par mois",
             priceUnitOnNewLine: true,
             description: "101 contrats de location et plus.",
@@ -294,7 +291,8 @@ export const landingPageContent: LandingPageContent = {
 
   cta: {
     title: "Prêt à gérer sans stress ?",
-    description: "Rejoignez plus de 450 propriétaires exigeants.",
+    description:
+      "Rejoignez plus de 450 propriétaires de la diaspora et 100 agents immobiliers, notaires et huissiers qui nous font déjà confiance.",
     actions: [
       { label: "Démarrer maintenant", href: landing_page_cta_link, variant: "white" },
       { label: "WhatsApp +228 91 84 90 90", href: "#", variant: "glass" },

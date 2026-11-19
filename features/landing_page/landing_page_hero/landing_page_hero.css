@@ -12,7 +12,7 @@
 }
 
 .lp-hero-title {
-  font-size: clamp(42px, 6.2vw, 80px);
+  font-size: clamp(38px, 5vw, 64px);
   font-weight: 800;
 }
 
@@ -25,7 +25,7 @@
   margin: 26px 0 34px;
   font-size: 20px;
   color: var(--mut);
-  max-width: 36ch;
+  max-width: 46ch;
 }
 
 .lp-hero-platforms {
@@ -54,11 +54,16 @@
 .lp-hero-trust {
   display: flex;
   gap: 22px;
-  margin-top: 18px;
+  margin-top: 30px;
   color: var(--mut);
   font-size: 14px;
   font-weight: 500;
   flex-wrap: wrap;
+}
+
+/* tighter when it follows the platform tags */
+.lp-hero-platforms + .lp-hero-trust {
+  margin-top: 18px;
 }
 
 .lp-hero-trust span {

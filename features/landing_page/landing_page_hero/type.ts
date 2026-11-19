@@ -23,7 +23,8 @@ export type LandingPageHeroProps = {
   highlight: string;
   description: string;
   actions: LandingAction[];
-  platforms: LandingHeroPlatform[];
+  /** Optional tags under the buttons (e.g. "Mobile app", "Web platform"); hidden when empty. */
+  platforms?: LandingHeroPlatform[];
   trustItems: string[];
   phone: LandingHeroPhoneMock;
 };

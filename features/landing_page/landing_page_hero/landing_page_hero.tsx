@@ -14,7 +14,7 @@ export function LandingPageHero({
   highlight,
   description,
   actions,
-  platforms,
+  platforms = [],
   trustItems,
   phone,
 }: LandingPageHeroProps) {
@@ -32,14 +32,16 @@ export function LandingPageHero({
               <LandingButton key={action.label} {...action} />
             ))}
           </div>
-          <div className="lp-hero-platforms">
-            {platforms.map((platform) => (
-              <span key={platform.label}>
-                <LandingIcon name={platform.icon} strokeWidth={2} />
-                {platform.label}
-              </span>
-            ))}
-          </div>
+          {platforms.length > 0 ? (
+            <div className="lp-hero-platforms">
+              {platforms.map((platform) => (
+                <span key={platform.label}>
+                  <LandingIcon name={platform.icon} strokeWidth={2} />
+                  {platform.label}
+                </span>
+              ))}
+            </div>
+          ) : null}
           <div className="lp-hero-trust">
             {trustItems.map((item) => (
               <span key={item}>

@@ -68,18 +68,15 @@ export const landingPageContentEn: LandingPageContent = {
   },
 
   hero: {
-    title: "Manage smarter.",
-    highlight: "Wherever you are.",
-    description: "For landlords, the diaspora and real estate professionals.",
+    title: "Your property portfolio deserves",
+    highlight: "smarter management.",
+    description:
+      "Smart property management, wherever you are. The solution built for diaspora landlords and ambitious real estate professionals.",
     actions: [
       { label: "Start for free", href: landing_page_cta_link, variant: "primary", withArrow: true },
       { label: "See the demo", href: landing_page_cta_link, variant: "ghost" },
     ],
-    platforms: [
-      { icon: "phone", label: "Mobile app" },
-      { icon: "monitor", label: "Web platform" },
-    ],
-    trustItems: ["Free, no commitment", "OTR-compliant leases"],
+    trustItems: ["Free, no commitment", "Tax-compliant contracts"],
     phone: {
       title: "October rent",
       location: "Agoè",
@@ -140,7 +137,7 @@ export const landingPageContentEn: LandingPageContent = {
       { before: "Unpaid rent", after: "Recovery handled by ImmoAsk" },
       { before: "Late rent", after: "Transfer every 5th of the month" },
       { before: "Inflated quotes", after: "Before and after photos" },
-      { before: "Legal grey areas", after: "OTR-compliant leases" },
+      { before: "Legal grey areas", after: "Tax-compliant contracts" },
     ],
   },
 
@@ -225,7 +222,7 @@ export const landingPageContentEn: LandingPageContent = {
         plans: [
           {
             name: "Business",
-            price: "0.49999",
+            price: "0.79999",
             priceUnit: "USD per lease, per month",
             priceUnitOnNewLine: true,
             description: "From 1 to 100 rental agreements.",
@@ -234,7 +231,7 @@ export const landingPageContentEn: LandingPageContent = {
           },
           {
             name: "Business Plus",
-            price: "0.39999",
+            price: "0.59999",
             priceUnit: "USD per lease, per month",
             priceUnitOnNewLine: true,
             description: "101 rental agreements and more.",
@@ -294,7 +291,8 @@ export const landingPageContentEn: LandingPageContent = {
 
   cta: {
     title: "Ready to manage stress-free?",
-    description: "Join more than 450 demanding landlords.",
+    description:
+      "Join more than 450 diaspora landlords and 100 real estate agents, notaries and bailiffs who already trust us.",
     actions: [
       { label: "Get started now", href: landing_page_cta_link, variant: "white" },
       { label: "WhatsApp +228 91 84 90 90", href: "#", variant: "glass" },

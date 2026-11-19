@@ -47,8 +47,10 @@
 .lp-cta-final p {
   position: relative;
   margin: -14px auto 34px;
+  max-width: 48ch;
   color: #d5ebf8;
   font-size: 19px;
+  text-wrap: balance;
 }
 
 .lp-cta-actions {
