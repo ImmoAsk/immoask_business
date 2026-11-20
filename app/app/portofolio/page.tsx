@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { Portofolios } from "@/features/portofolios";
 
 export const metadata: Metadata = {
-  title: "Portefeuille — ImmoAsk Business",
+  title: "Portofolio — ImmoAsk Business",
 };
 
 export default function PortofolioPage() {
-  return <h1>Portefeuille</h1>;
+  return <Portofolios />;
 }

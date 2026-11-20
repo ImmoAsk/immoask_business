@@ -168,6 +168,77 @@ const paths = {
       <circle cx="12" cy="18.5" r="1" />
     </>
   ),
+  home: (
+    <>
+      <path d="M3.5 11 12 4l8.5 7" />
+      <path d="M5.5 9.5V20h13V9.5M10 20v-5h4v5" />
+    </>
+  ),
+  store: (
+    <>
+      <path d="M4 9.5 5.5 4h13L20 9.5" />
+      <path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0" />
+      <path d="M5.5 12v8h13v-8M10 20v-4.5h4V20" />
+    </>
+  ),
+  sofa: (
+    <>
+      <path d="M5 11V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3" />
+      <path d="M3 13a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v5H3zM5 18v2M19 18v2" />
+    </>
+  ),
+  trees: (
+    <>
+      <path d="M3 20h18M7.5 20v-4M16 20v-5" />
+      <path d="M7.5 16 4 15.5 7.5 7l3.5 8.5z" />
+      <circle cx="16" cy="11" r="3.5" />
+    </>
+  ),
+  mapPin: (
+    <>
+      <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" />
+      <circle cx="12" cy="9.5" r="2.5" />
+    </>
+  ),
+  map: (
+    <>
+      <path d="M9 4 3.5 6v14L9 18l6 2 5.5-2V4L15 6z" />
+      <path d="M9 4v14M15 6v14" />
+    </>
+  ),
+  list: <path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01" />,
+  filter: <path d="M3.5 5h17l-6.5 8v5.5l-4 2V13z" />,
+  sort: <path d="M7 4v16M3.5 16.5 7 20l3.5-3.5M13.5 6H21M13.5 11h5.5M13.5 16H17" />,
+  bed: (
+    <>
+      <path d="M3 18V6M3 13h18v5M21 13v-1.5a3 3 0 0 0-3-3h-7V13" />
+      <circle cx="7" cy="10" r="1.5" />
+    </>
+  ),
+  surface: (
+    <>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="2" />
+      <path d="M3.5 9H7M3.5 14H7M9 3.5V7M14 3.5V7" />
+    </>
+  ),
+  sparkles: (
+    <>
+      <path d="M11 3.5 12.7 8.3 17.5 10l-4.8 1.7L11 16.5l-1.7-4.8L4.5 10l4.8-1.7z" />
+      <path d="M18.5 15v5M16 17.5h5" />
+    </>
+  ),
+  plus: <path d="M12 5v14M5 12h14" />,
+  minus: <path d="M5 12h14" />,
+  chevronLeft: <path d="M15 6l-6 6 6 6" />,
+  chevronRight: <path d="M9 6l6 6-6 6" />,
+  expand: <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />,
+  reset: (
+    <>
+      <path d="M4 4v5h5" />
+      <path d="M4.6 13.5A7.5 7.5 0 1 0 6.5 6.5L4 9" />
+    </>
+  ),
+  download: <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />,
 } satisfies Record<string, ReactNode>;
 
 export type IconName = keyof typeof paths;
