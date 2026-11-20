@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
+  redirects() {
+    // The back office has no index page: /app opens the dashboard.
+    return [{ source: "/app", destination: "/app/dashboard", permanent: false }];
+  },
   turbopack: {
     rules: {
       "*.css": {
