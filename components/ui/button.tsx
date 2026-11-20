@@ -5,6 +5,8 @@ import { focusRing } from "@/components/ui/styles";
 const variants = {
   primary:
     "bg-zinc-950 text-white hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200",
+  brand:
+    "bg-brand-600 text-white hover:bg-brand-700 dark:bg-brand-500 dark:text-white dark:hover:bg-brand-600",
   secondary:
     "border border-black/10 bg-white text-zinc-950 hover:bg-zinc-50 dark:border-white/15 dark:bg-zinc-950 dark:text-zinc-50 dark:hover:bg-zinc-900",
   ghost:
