@@ -1,5 +1,20 @@
 @import "tailwindcss";
 
+/*
+ * `dark:` follows <html data-theme> (set by lib/utils/theme), so the theme toggle drives it.
+ * Before the theme script has run (no data-theme), it falls back to the OS preference.
+ */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme]), :root:not([data-theme]) *) {
+      @slot;
+    }
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -10,10 +25,23 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* ImmoAsk brand blue (same values as the landing page tokens) */
+  --color-brand-50: #eaf5fc;
+  --color-brand-100: #d5ebf8;
+  --color-brand-500: #0b84c6;
+  --color-brand-600: #0a74ae;
+  --color-brand-700: #075f93;
+  --color-brand-900: #06304a;
+}
+
+:root[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     --background: #0a0a0a;
     --foreground: #ededed;
   }

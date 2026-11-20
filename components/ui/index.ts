@@ -32,6 +32,9 @@ export {
 } from "@/components/ui/dialog";
 export type { DialogProps } from "@/components/ui/dialog";
 
+export { Icon } from "@/components/ui/icon";
+export type { IconName, IconProps } from "@/components/ui/icon";
+
 export { Input } from "@/components/ui/input";
 export type { InputProps } from "@/components/ui/input";
 
