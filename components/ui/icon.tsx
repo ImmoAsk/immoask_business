@@ -239,6 +239,29 @@ const paths = {
     </>
   ),
   download: <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />,
+  whatsapp: (
+    <>
+      <path d="M4 20l1.2-3.6A8.5 8.5 0 1 1 8 19.1z" />
+      <path d="M9 8.5c0 3.2 2.3 5.9 5.5 6.5l1-1.6-2-1-.9.8a4.5 4.5 0 0 1-2.3-2.3l.8-.9-1-2-1.6 1z" />
+    </>
+  ),
+  phone: <path d="M5 3.5h3.5l1.5 4.5-2.3 1.4a11 11 0 0 0 5 5l1.4-2.3 4.5 1.5V17a2.5 2.5 0 0 1-2.5 2.5A15.5 15.5 0 0 1 2.5 6 2.5 2.5 0 0 1 5 3.5z" />,
+  alert: (
+    <>
+      <path d="M10.3 4.2 2.8 17.5A2 2 0 0 0 4.5 20.5h15a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0z" />
+      <path d="M12 9.5v4.5M12 17.2h.01" />
+    </>
+  ),
+  hourglass: <path d="M6.5 3.5h11M6.5 20.5h11M7.5 3.5c0 4.5 4.5 5.5 4.5 8.5s-4.5 4-4.5 8.5M16.5 3.5c0 4.5-4.5 5.5-4.5 8.5s4.5 4 4.5 8.5" />,
+  sliders: (
+    <>
+      <path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1" />
+      <circle cx="15" cy="6" r="2" />
+      <circle cx="9" cy="12" r="2" />
+      <circle cx="17" cy="18" r="2" />
+    </>
+  ),
+  externalLink: <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />,
 } satisfies Record<string, ReactNode>;
 
 export type IconName = keyof typeof paths;

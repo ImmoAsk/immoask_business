@@ -71,3 +71,12 @@ export type { TabsContentProps, TabsProps, TabsTriggerProps } from "@/components
 
 export { Textarea } from "@/components/ui/textarea";
 export type { TextareaProps } from "@/components/ui/textarea";
+
+export { ExportActions } from "@/components/ui/export_actions";
+export type { ExportActionsProps } from "@/components/ui/export_actions";
+
+export { Pagination } from "@/components/ui/pagination";
+export type { PaginationProps } from "@/components/ui/pagination";
+
+export { PropertyThumbnail, propertyKinds } from "@/components/ui/property_thumbnail";
+export type { PropertyKind, PropertyThumbnailProps } from "@/components/ui/property_thumbnail";

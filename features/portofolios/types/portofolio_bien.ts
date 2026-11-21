@@ -1,11 +1,7 @@
+import type { PropertyKind } from "@/components/ui/property_thumbnail";
+
 /** Kind of property, drives the thumbnail and the "Type de bien" filter. */
-export type PortofolioBienType =
-  | "villa"
-  | "appartement"
-  | "studio"
-  | "terrain"
-  | "immeuble"
-  | "boutique";
+export type PortofolioBienType = PropertyKind;
 
 export type PortofolioBienStatus = "loue" | "vacant" | "en_travaux";
 

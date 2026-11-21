@@ -1,8 +1,10 @@
 "use client";
 
+import { ExportActions } from "@/components/ui/export_actions";
 import { Icon } from "@/components/ui/icon";
 import { focusRing } from "@/components/ui/styles";
 import { cn } from "@/lib/cn";
+import type { ExportTable } from "@/lib/utils/export";
 import type { usePortofolioSelection } from "../hooks/use_portofolio_selection";
 import type { PortofolioBien } from "../types";
 import { PortofoliosBienCard } from "./portofolios_bien_card";
@@ -52,34 +54,29 @@ export function PortofoliosTableau({
         <h2 id="portofolio-table-title" className="text-lg font-semibold text-zinc-950 dark:text-zinc-50">
           {results.length} bien{results.length > 1 ? "s" : ""} trouvé{results.length > 1 ? "s" : ""}
         </h2>
-        {selectedCount > 0 ? (
-          <div className="flex items-center gap-2 text-sm">
-            <span className="font-medium text-zinc-600 dark:text-zinc-300">
-              {selectedCount} sélectionné{selectedCount > 1 ? "s" : ""}
-            </span>
-            <button
-              type="button"
-              onClick={() => exportCsv(results.filter((bien) => selection.isSelected(bien.id)))}
-              className={cn(
-                "inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-xl bg-brand-600 px-3 font-semibold text-white hover:bg-brand-700 dark:bg-brand-500",
-                focusRing,
-              )}
-            >
-              <Icon name="download" className="size-4" />
-              Exporter (CSV)
-            </button>
+        <div className="flex flex-wrap items-center gap-2">
+          {selectedCount > 0 ? (
             <button
               type="button"
               onClick={selection.clear}
               className={cn(
-                "h-9 cursor-pointer rounded-xl px-3 font-medium text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-white/10",
+                "h-9 cursor-pointer rounded-xl px-3 text-sm font-medium text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-white/10",
                 focusRing,
               )}
             >
               Désélectionner
             </button>
-          </div>
-        ) : null}
+          ) : null}
+          <ExportActions
+            count={selectedCount > 0 ? selectedCount : results.length}
+            selection={selectedCount > 0}
+            getTable={() =>
+              portofolioExportTable(
+                selectedCount > 0 ? results.filter((bien) => selection.isSelected(bien.id)) : results,
+              )
+            }
+          />
+        </div>
       </div>
 
       {results.length === 0 ? (
@@ -203,29 +200,20 @@ function EmptyState() {
   );
 }
 
-function csvCell(value: string | number) {
-  const text = String(value);
-  return /[";\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
-}
-
-/** Semicolon-separated with a BOM, so Excel (fr) opens accents and columns correctly. */
-function exportCsv(biens: PortofolioBien[]) {
-  const header = ["Référence", "Bien", "Quartier", "Ville", "Zone", "Statut", "Occupant", "Loyer (FCFA/mois)"];
-  const rows = biens.map((bien) => [
-    bien.reference,
-    bien.title,
-    bien.location.quartier,
-    bien.location.city,
-    bien.location.zone,
-    statusLabel(bien),
-    bien.occupant.kind === "locataire" ? bien.occupant.name : bien.occupant.label,
-    bien.rent,
-  ]);
-  const csv = [header, ...rows].map((row) => row.map(csvCell).join(";")).join("\n");
-  const url = URL.createObjectURL(new Blob(["﻿", csv], { type: "text/csv;charset=utf-8" }));
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "patrimoine_immoask.csv";
-  link.click();
-  URL.revokeObjectURL(url);
+/** Rows for the CSV / PDF export. */
+export function portofolioExportTable(biens: PortofolioBien[]): ExportTable {
+  return {
+    title: "Patrimoine ImmoAsk",
+    header: ["Référence", "Bien", "Quartier", "Ville", "Zone", "Statut", "Occupant", "Loyer (FCFA/mois)"],
+    rows: biens.map((bien) => [
+      bien.reference,
+      bien.title,
+      bien.location.quartier,
+      bien.location.city,
+      bien.location.zone,
+      statusLabel(bien),
+      bien.occupant.kind === "locataire" ? bien.occupant.name : bien.occupant.label,
+      bien.rent,
+    ]),
+  };
 }

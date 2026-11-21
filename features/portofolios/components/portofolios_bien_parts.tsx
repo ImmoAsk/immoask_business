@@ -1,11 +1,11 @@
-import Image from "next/image";
 import { initials } from "@/components/layout";
 import { Icon } from "@/components/ui/icon";
 import type { IconName } from "@/components/ui/icon";
+import { PropertyThumbnail } from "@/components/ui/property_thumbnail";
 import { cn } from "@/lib/cn";
 import { formatAmount } from "@/lib/utils/format";
 import type { PortofolioBien, PortofolioFeatureIcon } from "../types";
-import { portofolioPayments, portofolioStatuses, portofolioTypes } from "./portofolios_styles";
+import { portofolioPayments, portofolioStatuses } from "./portofolios_styles";
 
 // Small building blocks shared by the table, the mobile cards and the map.
 
@@ -25,29 +25,7 @@ export function PortofoliosThumbnail({
   compact?: boolean;
   className?: string;
 }) {
-  const type = portofolioTypes[bien.type];
-  return (
-    <div
-      className={cn(
-        "relative grid shrink-0 place-items-center overflow-hidden rounded-2xl bg-linear-to-br",
-        type.tile,
-        className,
-      )}
-    >
-      {bien.photoUrl ? (
-        <Image src={bien.photoUrl} alt="" fill sizes="144px" className="object-cover" />
-      ) : (
-        <>
-          <Icon name={type.icon} className={cn("opacity-80", compact ? "size-5" : "size-7")} />
-          {compact ? null : (
-          <span className="absolute bottom-1.5 left-2 text-[10px] font-semibold tracking-wide uppercase opacity-70">
-            {type.label}
-          </span>
-          )}
-        </>
-      )}
-    </div>
-  );
+  return <PropertyThumbnail kind={bien.type} photoUrl={bien.photoUrl} compact={compact} className={className} />;
 }
 
 export function statusLabel(bien: PortofolioBien) {
