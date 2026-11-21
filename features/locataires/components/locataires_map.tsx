@@ -15,7 +15,7 @@ import { PaymentBadge, paymentLabel } from "./locataires_parts";
 const legend: MapLegendItem[] = [
   { label: "À jour", tone: "brand" },
   { label: "En retard", tone: "amber" },
-  { label: "Fin de bail proche", tone: "emerald" },
+  { label: "Fin de bail proche", tone: "deep" },
 ];
 
 export type LocatairesMapProps = {
@@ -49,7 +49,7 @@ export function LocatairesMap({
       coordinates: locataire.bien.coordinates,
       label: `${locataire.name} — ${locataire.bien.title} — ${paymentLabel(locataire)}${ending ? " — fin de bail proche" : ""}`,
       place: locataire.bien.city,
-      tone: late ? "amber" : ending ? "emerald" : "brand",
+      tone: late ? "amber" : ending ? "deep" : "brand",
       icon: late ? "alert" : ending ? "calendar" : "home",
     };
   });

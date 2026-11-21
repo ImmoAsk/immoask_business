@@ -150,7 +150,7 @@ export function QuittanceCell({ locataire }: { locataire: Locataire }) {
       return (
         <div className="text-[13px]">
           <p className="flex items-center gap-1.5 whitespace-nowrap text-zinc-800 dark:text-zinc-200">
-            <Icon name="calendarCheck" className="size-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
+            <Icon name="calendarCheck" className="size-4 shrink-0 text-brand-600 dark:text-brand-100" />
             Envoyée le {formatDayMonth(quittance.date)}
           </p>
           <p className="mt-0.5 truncate pl-5.5 text-xs text-zinc-500 dark:text-zinc-400">N° {quittance.numero}</p>

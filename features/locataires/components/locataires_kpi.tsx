@@ -40,7 +40,7 @@ export function LocatairesKpi({ kpis, onShowLate, onShowRenewals }: LocatairesKp
       </article>
 
       <article className={card}>
-        <Heading tile="bg-emerald-500 text-white" icon="receipt">
+        <Heading tile="bg-brand-100 text-brand-800 dark:bg-brand-800/60 dark:text-brand-100" icon="receipt">
           Loyers à jour
         </Heading>
         <p className="mt-4 flex flex-wrap items-center gap-3">
@@ -63,12 +63,12 @@ export function LocatairesKpi({ kpis, onShowLate, onShowRenewals }: LocatairesKp
           aria-valuemax={100}
           className="mt-auto h-2 overflow-hidden rounded-full bg-zinc-100 dark:bg-white/10"
         >
-          <div className="h-full rounded-full bg-emerald-500" style={{ width: `${upToDate.ratePercent}%` }} />
+          <div className="h-full rounded-full bg-brand-500" style={{ width: `${upToDate.ratePercent}%` }} />
         </div>
       </article>
 
       <article className={card}>
-        <Heading tile="bg-amber-400 text-white dark:bg-amber-500" icon="clock">
+        <Heading tile="bg-brand-900 text-white dark:bg-brand-300 dark:text-brand-950" icon="clock">
           Retards de paiement
         </Heading>
         <p className="mt-4 flex flex-wrap items-center gap-3">
@@ -86,7 +86,7 @@ export function LocatairesKpi({ kpis, onShowLate, onShowRenewals }: LocatairesKp
             type="button"
             onClick={onShowLate}
             className={cn(
-              "mt-auto inline-flex w-fit cursor-pointer items-center gap-2 rounded-xl bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950 dark:text-emerald-300 dark:hover:bg-emerald-900",
+              "mt-auto inline-flex w-fit cursor-pointer items-center gap-2 rounded-xl bg-brand-50 px-3 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-100 dark:bg-brand-900/60 dark:text-brand-100 dark:hover:bg-brand-900",
               focusRing,
             )}
           >
@@ -94,12 +94,12 @@ export function LocatairesKpi({ kpis, onShowLate, onShowRenewals }: LocatairesKp
             Relancer via WhatsApp
           </button>
         ) : (
-          <p className="mt-auto text-sm text-emerald-700 dark:text-emerald-300">Aucun retard ce mois-ci</p>
+          <p className="mt-auto text-sm text-brand-700 dark:text-brand-100">Aucun retard ce mois-ci</p>
         )}
       </article>
 
       <article className={card}>
-        <Heading tile="bg-violet-100 text-violet-600 dark:bg-violet-950 dark:text-violet-300" icon="file">
+        <Heading tile="bg-brand-50 text-brand-600 ring-1 ring-inset ring-brand-200 dark:bg-brand-900/60 dark:text-brand-100 dark:ring-brand-700" icon="file">
           Baux à renouveler
         </Heading>
         <p className={cn(value, "mt-4")}>
@@ -157,7 +157,7 @@ function Delta({ value: delta, format }: { value: number; format: (value: number
       className={cn(
         deltaChip,
         up
-          ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300"
+          ? "bg-brand-50 text-brand-700 dark:bg-brand-900/60 dark:text-brand-100"
           : "bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300",
       )}
     >

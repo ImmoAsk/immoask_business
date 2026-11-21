@@ -163,7 +163,7 @@ export function LocatairesTable({
                             title="Envoyer la quittance"
                             aria-label={`Envoyer la quittance à ${locataire.name}`}
                             onClick={() => onAction?.("quittance", locataire)}
-                            className={cn(iconButton, "text-emerald-600 dark:text-emerald-400")}
+                            className={cn(iconButton, "text-brand-600 dark:text-brand-100")}
                           >
                             <Icon name="receipt" className="size-5" />
                           </button>

@@ -39,7 +39,7 @@ function KpiFootnote({ footnote, tone }: { footnote: DashboardKpiFootnote; tone:
       const up = footnote.deltaPercent >= 0;
       return (
         <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-          <span className={cn("inline-flex items-center gap-1.5 font-medium", up ? "text-emerald-600" : "text-red-600")}>
+          <span className={cn("inline-flex items-center gap-1.5 font-medium", up ? "text-brand-600" : "text-red-600")}>
             <Icon name="trendUp" className={cn("size-4", !up && "-scale-y-100")} />
             {up ? "+" : ""}
             {footnote.deltaPercent.toLocaleString("fr-FR")}% ce mois

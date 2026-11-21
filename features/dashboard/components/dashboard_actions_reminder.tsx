@@ -45,9 +45,7 @@ function ReminderItem({ reminder }: { reminder: DashboardActionReminderData }) {
             <span
               className={cn(
                 "shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold",
-                reminder.tone === "emerald"
-                  ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300"
-                  : "bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300",
+                "bg-brand-50 text-brand-700 dark:bg-brand-900/60 dark:text-brand-100",
               )}
             >
               {reminder.badge}

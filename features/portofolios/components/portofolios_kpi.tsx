@@ -17,8 +17,8 @@ const linkClass = cn(
 const levels: Record<PortofolioOccupancyLevel, { label: string; className: string; bar: string }> = {
   optimal: {
     label: "Optimal",
-    className: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
-    bar: "bg-emerald-500",
+    className: "bg-brand-600 text-white dark:bg-brand-500",
+    bar: "bg-brand-600",
   },
   correct: {
     label: "Correct",
@@ -76,7 +76,7 @@ function RevenueCard({ revenue }: { revenue: PortofolioKpis["revenue"] }) {
           <p
             className={cn(
               "relative z-10 mt-1 inline-flex items-center gap-1 text-sm font-semibold",
-              up ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400",
+              up ? "text-brand-600 dark:text-brand-100" : "text-red-600 dark:text-red-400",
             )}
           >
             <Icon name="trendUp" className={cn("size-4", !up && "-scale-y-100")} />
@@ -163,7 +163,7 @@ function OccupancyDonut({ ratePercent }: { ratePercent: number }) {
   const circumference = 2 * Math.PI * radius;
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="size-10 -rotate-90">
-      <circle cx="12" cy="12" r={radius} fill="none" strokeWidth="6" className="stroke-emerald-100 dark:stroke-emerald-950" />
+      <circle cx="12" cy="12" r={radius} fill="none" strokeWidth="6" className="stroke-brand-100 dark:stroke-brand-900" />
       <circle
         cx="12"
         cy="12"
@@ -171,7 +171,7 @@ function OccupancyDonut({ ratePercent }: { ratePercent: number }) {
         fill="none"
         strokeWidth="6"
         strokeDasharray={`${(ratePercent / 100) * circumference} ${circumference}`}
-        className="stroke-emerald-500"
+        className="stroke-brand-500"
       />
     </svg>
   );
@@ -181,7 +181,7 @@ function AvailabilityCard({ available, onShowAvailable }: { available: number; o
   return (
     <article className={card}>
       <CardHeading
-        tile="bg-brand-50 text-brand-600 dark:bg-brand-900/60 dark:text-brand-100"
+        tile="bg-brand-100 text-brand-800 dark:bg-brand-800/60 dark:text-brand-100"
         icon={<Icon name="users" className="size-5" />}
       >
         Disponibles / Vacants
@@ -206,12 +206,12 @@ function MaintenanceCard({ maintenance }: { maintenance: PortofolioKpis["mainten
   return (
     <article className={card}>
       <CardHeading
-        tile="bg-orange-50 text-orange-500 dark:bg-orange-950 dark:text-orange-300"
+        tile="bg-brand-900 text-white dark:bg-brand-300 dark:text-brand-950"
         icon={<Icon name="wrench" className="size-5" strokeWidth={2} />}
       >
         Maintenance & EDL
       </CardHeading>
-      <p className="mt-4 text-[34px] xl:text-[30px] 2xl:text-[34px] leading-tight font-bold tracking-tight text-orange-600 tabular-nums dark:text-orange-400">
+      <p className="mt-4 text-[34px] xl:text-[30px] 2xl:text-[34px] leading-tight font-bold tracking-tight text-zinc-950 tabular-nums dark:text-zinc-50">
         {maintenance.count} <span className="text-2xl">en rénovation</span>
       </p>
       <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
@@ -229,7 +229,7 @@ function MaintenanceCard({ maintenance }: { maintenance: PortofolioKpis["mainten
             aria-valuemax={100}
             className="h-2 flex-1 overflow-hidden rounded-full bg-zinc-100 dark:bg-white/10"
           >
-            <div className="h-full rounded-full bg-orange-500" style={{ width: `${maintenance.progressPercent}%` }} />
+            <div className="h-full rounded-full bg-brand-600" style={{ width: `${maintenance.progressPercent}%` }} />
           </div>
         ) : (
           <span className="flex-1" />

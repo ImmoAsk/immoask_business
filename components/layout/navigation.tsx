@@ -145,11 +145,11 @@ function NavBadgeView({ badge }: { badge: NavBadge }): ReactNode {
       );
     case "status":
       return (
-        <span className="rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-semibold whitespace-nowrap text-amber-700 dark:bg-amber-950 dark:text-amber-300">
+        <span className="rounded-full bg-brand-50 px-2 py-0.5 text-[11px] font-semibold whitespace-nowrap text-brand-700 dark:bg-brand-900/60 dark:text-brand-100">
           {badge.label}
         </span>
       );
     case "dot":
-      return <span aria-hidden="true" className="size-2 rounded-full bg-emerald-500" />;
+      return <span aria-hidden="true" className="size-2 rounded-full bg-brand-500" />;
   }
 }

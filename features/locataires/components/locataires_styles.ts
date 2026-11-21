@@ -12,8 +12,8 @@ export const locatairesControl =
 export const paymentStatuses: Record<LocatairePaymentStatus, { label: string; badge: string; dot: string }> = {
   a_jour: {
     label: "À jour",
-    badge: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
-    dot: "bg-emerald-500",
+    badge: "bg-brand-50 text-brand-700 dark:bg-brand-900/60 dark:text-brand-100",
+    dot: "bg-brand-500",
   },
   en_retard: {
     label: "En retard",
@@ -29,15 +29,15 @@ export const leaseTypes: Record<LocataireLeaseType, { label: string; badge: stri
   },
   commercial: {
     label: "Commercial",
-    badge: "bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300",
+    badge: "bg-brand-800 text-white dark:bg-brand-300 dark:text-brand-950",
   },
 };
 
 // Avatar colors follow the tenant (stable across filters and pages), not the row position.
 export const avatarTones = [
   "bg-brand-50 text-brand-700 dark:bg-brand-900/60 dark:text-brand-100",
-  "bg-violet-50 text-violet-700 dark:bg-violet-950 dark:text-violet-300",
-  "bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300",
-  "bg-orange-50 text-orange-700 dark:bg-orange-950 dark:text-orange-300",
-  "bg-rose-50 text-rose-700 dark:bg-rose-950 dark:text-rose-300",
+  "bg-brand-100 text-brand-800 dark:bg-brand-800/60 dark:text-brand-100",
+  "bg-brand-200 text-brand-900 dark:bg-brand-700/60 dark:text-brand-50",
+  "bg-brand-600 text-white dark:bg-brand-500",
+  "bg-brand-900 text-white dark:bg-brand-300 dark:text-brand-950",
 ];

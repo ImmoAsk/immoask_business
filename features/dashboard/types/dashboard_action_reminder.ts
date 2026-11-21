@@ -1,6 +1,6 @@
 import type { IconName } from "@/components/ui/icon";
 
-export type DashboardReminderTone = "brand" | "emerald" | "amber";
+export type DashboardReminderTone = "brand" | "deep" | "solid";
 
 export type DashboardActionReminderData = {
   id: string;

@@ -20,6 +20,11 @@ export function areaKey(locataire: Locataire) {
 function matchesQuery(locataire: Locataire, query: string) {
   const terms = normalize(query).split(/\s+/).filter(Boolean);
   if (terms.length === 0) return true;
+  // A query made only of digits and phone symbols ("+33 6 12") is one number.
+  const queryDigits = query.replace(/\D/g, "");
+  if (/^[\d\s+().-]+$/.test(query.trim()) && queryDigits.length >= 2) {
+    return locataire.phone.replace(/\D/g, "").includes(queryDigits);
+  }
   const text = normalize(
     [
       locataire.name,

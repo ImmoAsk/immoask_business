@@ -4,9 +4,9 @@ import { cn } from "@/lib/cn";
 const variants = {
   default:
     "border-black/10 bg-zinc-50 text-zinc-950 dark:border-white/15 dark:bg-zinc-900 dark:text-zinc-50",
-  info: "border-sky-200 bg-sky-50 text-sky-950 dark:border-sky-900 dark:bg-sky-950 dark:text-sky-100",
+  info: "border-brand-200 bg-brand-50 text-brand-950 dark:border-brand-900 dark:bg-brand-900/60 dark:text-brand-100",
   success:
-    "border-emerald-200 bg-emerald-50 text-emerald-950 dark:border-emerald-900 dark:bg-emerald-950 dark:text-emerald-100",
+    "border-brand-200 bg-brand-50 text-brand-950 dark:border-brand-900 dark:bg-brand-900/60 dark:text-brand-100",
   warning:
     "border-amber-200 bg-amber-50 text-amber-950 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-100",
   danger:

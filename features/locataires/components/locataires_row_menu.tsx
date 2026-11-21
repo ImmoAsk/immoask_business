@@ -80,7 +80,7 @@ export function LocatairesRowMenu({ locataire, leaseEndingSoon = false, onAction
                 className={item}
                 onClick={() => setOpen(false)}
               >
-                <Icon name="whatsapp" className="size-4 text-emerald-600" /> Relancer via WhatsApp
+                <Icon name="whatsapp" className="size-4 text-brand-600" /> Relancer via WhatsApp
               </a>
             </li>
           ) : null}

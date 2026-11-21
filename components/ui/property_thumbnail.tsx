@@ -10,32 +10,32 @@ export const propertyKinds: Record<PropertyKind, { label: string; icon: IconName
   villa: {
     label: "Villa",
     icon: "home",
-    tile: "from-sky-100 to-brand-100 text-brand-700 dark:from-brand-900 dark:to-sky-950 dark:text-brand-100",
+    tile: "from-brand-50 to-brand-100 text-brand-700 dark:from-brand-900 dark:to-brand-950 dark:text-brand-100",
   },
   appartement: {
     label: "Appartement",
     icon: "building",
-    tile: "from-indigo-50 to-indigo-100 text-indigo-600 dark:from-indigo-950 dark:to-zinc-900 dark:text-indigo-300",
+    tile: "from-brand-100 to-brand-200 text-brand-800 dark:from-brand-800 dark:to-brand-950 dark:text-brand-100",
   },
   studio: {
     label: "Studio",
     icon: "sofa",
-    tile: "from-violet-50 to-violet-100 text-violet-600 dark:from-violet-950 dark:to-zinc-900 dark:text-violet-300",
+    tile: "from-brand-200 to-brand-300 text-brand-900 dark:from-brand-700 dark:to-brand-900 dark:text-brand-50",
   },
   terrain: {
     label: "Terrain",
     icon: "trees",
-    tile: "from-lime-50 to-emerald-100 text-emerald-700 dark:from-emerald-950 dark:to-zinc-900 dark:text-emerald-300",
+    tile: "from-zinc-50 to-brand-50 text-brand-600 dark:from-zinc-900 dark:to-brand-950 dark:text-brand-300",
   },
   immeuble: {
     label: "Immeuble",
     icon: "building",
-    tile: "from-slate-100 to-slate-200 text-slate-600 dark:from-slate-800 dark:to-zinc-900 dark:text-slate-300",
+    tile: "from-brand-700 to-brand-900 text-white dark:from-brand-600 dark:to-brand-900 dark:text-white",
   },
   boutique: {
     label: "Boutique",
     icon: "store",
-    tile: "from-amber-50 to-orange-100 text-orange-600 dark:from-amber-950 dark:to-zinc-900 dark:text-amber-300",
+    tile: "from-brand-400 to-brand-600 text-white dark:from-brand-500 dark:to-brand-800 dark:text-white",
   },
 };
 

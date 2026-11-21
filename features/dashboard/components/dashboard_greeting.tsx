@@ -17,8 +17,8 @@ export function DashboardGreeting({ greeting }: DashboardGreetingProps) {
           Bonjour, {firstName}
         </h1>
         {synced ? (
-          <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1.5 text-sm font-medium text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
-            <span aria-hidden="true" className="size-2 rounded-full bg-emerald-500" />
+          <span className="inline-flex items-center gap-2 rounded-full bg-brand-50 px-3.5 py-1.5 text-sm font-medium text-brand-700 dark:bg-brand-900/60 dark:text-brand-100">
+            <span aria-hidden="true" className="size-2 rounded-full bg-brand-500" />
             Synchronisé
           </span>
         ) : null}

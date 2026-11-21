@@ -16,7 +16,7 @@ const ZOOMS = [1, 1.5, 2.25, 3.5] as const;
 
 export type MapCoordinates = { lat: number; lng: number };
 
-export type MapMarkerTone = "brand" | "outline" | "orange" | "emerald" | "amber";
+export type MapMarkerTone = "brand" | "deep" | "outline" | "orange" | "amber";
 
 export type MapMarker = {
   id: string;
@@ -82,6 +82,11 @@ const pinTones: Record<MapMarkerTone, { body: string; tip: string; legend: strin
     tip: "border-t-brand-600 dark:border-t-brand-500",
     legend: "bg-brand-600 dark:bg-brand-500",
   },
+  deep: {
+    body: "bg-brand-900 text-white dark:bg-brand-300 dark:text-brand-950",
+    tip: "border-t-brand-900 dark:border-t-brand-300",
+    legend: "bg-brand-900 dark:bg-brand-300",
+  },
   outline: {
     body: "bg-white text-brand-600 ring-2 ring-inset ring-brand-600 dark:bg-zinc-900 dark:text-brand-100 dark:ring-brand-500",
     tip: "border-t-brand-600 dark:border-t-brand-500",
@@ -89,7 +94,6 @@ const pinTones: Record<MapMarkerTone, { body: string; tip: string; legend: strin
   },
   orange: { body: "bg-orange-500 text-white", tip: "border-t-orange-500", legend: "bg-orange-500" },
   amber: { body: "bg-amber-500 text-white", tip: "border-t-amber-500", legend: "bg-amber-500" },
-  emerald: { body: "bg-emerald-600 text-white", tip: "border-t-emerald-600", legend: "bg-emerald-600" },
 };
 
 export type LomeMapProps = {
@@ -98,6 +102,8 @@ export type LomeMapProps = {
   onSelect: (id: string | null) => void;
   /** Marker hovered elsewhere (e.g. in a list), drawn larger. */
   highlightedId?: string | null;
+  /** Several markers hovered at once (e.g. every property of an owner). */
+  highlightedIds?: readonly string[];
   /** Card shown above the selected marker. */
   renderPopup?: (id: string, close: () => void) => ReactNode;
   legend?: MapLegendItem[];
@@ -117,6 +123,7 @@ export function LomeMap({
   selectedId,
   onSelect,
   highlightedId,
+  highlightedIds,
   renderPopup,
   legend,
   topLeft,
@@ -206,7 +213,7 @@ export function LomeMap({
           if (position.left < -5 || position.left > 105 || position.top < -5 || position.top > 105) return null;
           const tone = pinTones[marker.tone];
           const active = marker.id === selectedId;
-          const highlighted = active || marker.id === highlightedId;
+          const highlighted = active || marker.id === highlightedId || (highlightedIds?.includes(marker.id) ?? false);
           return (
             <button
               key={marker.id}
@@ -357,8 +364,8 @@ function MapBackground({ viewBox }: { viewBox: string }) {
   return (
     <svg viewBox={viewBox} aria-hidden="true" className="absolute inset-0 size-full" preserveAspectRatio="none">
       <rect x={-2000} y={-2000} width={5000} height={5000} className="fill-[#f3f5f2] dark:fill-zinc-900" />
-      <path d="M380,0 C420,60 520,90 560,0 Z M60,90 C120,60 200,120 160,170 C110,200 40,150 60,90 Z" className="fill-[#e4eedb] dark:fill-emerald-950/40" />
-      <path d="M520,497 C600,480 700,468 820,441 C700,470 600,486 520,505 Z" className="fill-sky-200 dark:fill-sky-900/60" />
+      <path d="M380,0 C420,60 520,90 560,0 Z M60,90 C120,60 200,120 160,170 C110,200 40,150 60,90 Z" className="fill-brand-50 dark:fill-brand-900/30" />
+      <path d="M520,497 C600,480 700,468 820,441 C700,470 600,486 520,505 Z" className="fill-brand-200 dark:fill-brand-900/60" />
       <g fill="none" strokeLinecap="round">
         {streets.map((d) => (
           <path key={d} d={d} strokeWidth="1.5" vectorEffect="non-scaling-stroke" className="stroke-white dark:stroke-zinc-800" />
@@ -366,12 +373,12 @@ function MapBackground({ viewBox }: { viewBox: string }) {
         {mainRoads.map((d) => (
           <g key={d}>
             <path d={d} strokeWidth="6" vectorEffect="non-scaling-stroke" className="stroke-white dark:stroke-zinc-700" />
-            <path d={d} strokeWidth="3" vectorEffect="non-scaling-stroke" className="stroke-amber-200 dark:stroke-zinc-600" />
+            <path d={d} strokeWidth="3" vectorEffect="non-scaling-stroke" className="stroke-brand-100 dark:stroke-zinc-600" />
           </g>
         ))}
       </g>
-      <path d="M-2000,925 L0,617 Q500,540 1000,435 L3000,15 L3000,3000 L-2000,3000 Z" className="fill-sky-200/80 dark:fill-sky-950" />
-      <path d="M-2000,925 L0,617 Q500,540 1000,435 L3000,15" fill="none" strokeWidth="2" vectorEffect="non-scaling-stroke" className="stroke-sky-300 dark:stroke-sky-800" />
+      <path d="M-2000,925 L0,617 Q500,540 1000,435 L3000,15 L3000,3000 L-2000,3000 Z" className="fill-brand-200/80 dark:fill-brand-950" />
+      <path d="M-2000,925 L0,617 Q500,540 1000,435 L3000,15" fill="none" strokeWidth="2" vectorEffect="non-scaling-stroke" className="stroke-brand-300 dark:stroke-brand-800" />
       <g className="fill-zinc-500" fontSize="15" fontWeight="500">
         {places.map((place) => (
           <text key={place.label} x={place.x} y={place.y} textAnchor="middle">
@@ -382,7 +389,7 @@ function MapBackground({ viewBox }: { viewBox: string }) {
       <text x="505" y="455" textAnchor="middle" fontSize="38" fontWeight="700" className="fill-zinc-800 dark:fill-zinc-300">
         Lomé
       </text>
-      <text x="780" y="610" textAnchor="middle" fontSize="16" fontStyle="italic" className="fill-sky-700/70 dark:fill-sky-400/60">
+      <text x="780" y="610" textAnchor="middle" fontSize="16" fontStyle="italic" className="fill-brand-700/70 dark:fill-brand-400/60">
         Golfe de Guinée
       </text>
     </svg>

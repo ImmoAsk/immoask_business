@@ -26,7 +26,7 @@ export const mockDashboard: DashboardData = {
       value: 240_000,
       unit: "FCFA",
       icon: "clock",
-      tone: "amber",
+      tone: "warning",
       footnote: { kind: "alert", text: "3 locataires à relancer" },
     },
     {
@@ -35,7 +35,7 @@ export const mockDashboard: DashboardData = {
       value: 92.8,
       unit: "%",
       icon: "building",
-      tone: "indigo",
+      tone: "deep",
       footnote: { kind: "occupancy", occupied: 26, total: 28, vacant: 2 },
     },
     {
@@ -44,7 +44,7 @@ export const mockDashboard: DashboardData = {
       value: 3_340_800,
       unit: "FCFA",
       icon: "bank",
-      tone: "emerald",
+      tone: "solid",
       footnote: { kind: "success", text: "Virement le 5 Février" },
     },
   ],
@@ -124,7 +124,7 @@ export const mockDashboard: DashboardData = {
     {
       id: "cautions",
       icon: "shield",
-      tone: "emerald",
+      tone: "solid",
       title: "Dépôts de garantie conformes",
       description: "1 600 000 FCFA sécurisés",
       meta: "28 baux vérifiés",
@@ -132,7 +132,7 @@ export const mockDashboard: DashboardData = {
     {
       id: "otr",
       icon: "receipt",
-      tone: "amber",
+      tone: "deep",
       title: "Précompte OTR Togo (5%)",
       description: "192 000 FCFA retenus",
       meta: "Déclaration prête",
@@ -149,7 +149,7 @@ export const mockDashboard: DashboardData = {
     {
       id: "comptabilite",
       icon: "wallet",
-      tone: "emerald",
+      tone: "solid",
       title: "Comptabilité immobilière",
       description: "Journal des recettes Janvier",
       badge: "Prêt",

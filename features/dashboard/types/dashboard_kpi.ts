@@ -1,6 +1,6 @@
 import type { IconName } from "@/components/ui/icon";
 
-export type DashboardKpiTone = "brand" | "amber" | "indigo" | "emerald";
+export type DashboardKpiTone = "brand" | "deep" | "solid" | "warning";
 
 /** Line under the KPI value; each kind has its own layout. */
 export type DashboardKpiFootnote =

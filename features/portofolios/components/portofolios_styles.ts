@@ -17,13 +17,13 @@ export const portofolioTypes = propertyKinds;
 export const portofolioStatuses: Record<PortofolioBienStatus, { label: string; badge: string; dot: string }> = {
   loue: {
     label: "Loué",
-    badge: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
-    dot: "bg-emerald-500",
+    badge: "bg-brand-50 text-brand-700 dark:bg-brand-900/60 dark:text-brand-100",
+    dot: "bg-brand-600",
   },
   vacant: {
     label: "Vacant",
-    badge: "bg-brand-50 text-brand-700 dark:bg-brand-900/60 dark:text-brand-100",
-    dot: "bg-brand-500",
+    badge: "bg-white text-brand-700 ring-1 ring-inset ring-brand-200 dark:bg-transparent dark:text-brand-100 dark:ring-brand-700",
+    dot: "bg-brand-300",
   },
   en_travaux: {
     label: "En travaux",
@@ -36,12 +36,12 @@ export const portofolioPayments: Record<PortofolioPaymentState, { label: string;
   a_jour: {
     label: "À jour",
     icon: "checkCircle",
-    className: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
+    className: "bg-brand-50 text-brand-700 dark:bg-brand-900/60 dark:text-brand-100",
   },
   virement_recu: {
     label: "Virement reçu",
     icon: "checkCircle",
-    className: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
+    className: "bg-brand-50 text-brand-700 dark:bg-brand-900/60 dark:text-brand-100",
   },
   en_retard: {
     label: "En retard",

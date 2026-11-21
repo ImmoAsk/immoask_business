@@ -142,7 +142,7 @@ export function Header({
         >
           <Icon name="bell" className="size-5" />
           {hasUnreadNotifications ? (
-            <span className="absolute top-2.5 right-2.5 size-2.5 rounded-full bg-red-500 ring-2 ring-white dark:ring-zinc-950" />
+            <span className="absolute top-2.5 right-2.5 size-2.5 rounded-full bg-brand-500 ring-2 ring-white dark:ring-zinc-950" />
           ) : null}
         </button>
       </div>

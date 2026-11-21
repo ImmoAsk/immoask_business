@@ -10,7 +10,7 @@ import { dashboardPanel } from "./dashboard_styles";
 const statusStyle: Record<DashboardEncaissementStatus, { label: string; className: string }> = {
   paye: {
     label: "Payé",
-    className: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
+    className: "bg-brand-50 text-brand-700 dark:bg-brand-900/60 dark:text-brand-100",
   },
   en_retard: {
     label: "En retard",
@@ -25,8 +25,8 @@ const statusStyle: Record<DashboardEncaissementStatus, { label: string; classNam
 // Avatar colors are tied to the tenant (stable across reloads and filters), not to the row position.
 const avatarTones = [
   "bg-brand-50 text-brand-700 dark:bg-brand-900/60 dark:text-brand-100",
-  "bg-violet-50 text-violet-700 dark:bg-violet-950 dark:text-violet-300",
-  "bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300",
+  "bg-brand-100 text-brand-800 dark:bg-brand-800/60 dark:text-brand-100",
+  "bg-brand-200 text-brand-900 dark:bg-brand-700/60 dark:text-brand-50",
 ];
 
 function avatarTone(name: string, status: DashboardEncaissementStatus) {
