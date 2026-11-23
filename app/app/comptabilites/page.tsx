@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { Comptabilites } from "@/features/comptabilites";
 
 export const metadata: Metadata = {
-  title: "Comptabilités — ImmoAsk Business",
+  title: "Comptabilité — ImmoAsk Business",
 };
 
 export default function ComptabilitesPage() {
-  return <h1>Comptabilités</h1>;
+  return <Comptabilites />;
 }

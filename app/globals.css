@@ -18,6 +18,15 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /*
+   * Chart series in ImmoAsk blue, checked with the dataviz palette validator (lightness band,
+   * chroma, colour-blind and normal-vision separation). Dark mode has its own validated steps.
+   */
+  --chart-income: #075f93;
+  --chart-expense: #3fa2d9;
+  --chart-part-1: #005591;
+  --chart-part-2: #008dcc;
+  --chart-part-3: #61bee6;
 }
 
 @theme inline {
@@ -38,17 +47,35 @@
   --color-brand-800: #08476d;
   --color-brand-900: #06304a;
   --color-brand-950: #031c2c;
+
+  --color-chart-income: var(--chart-income);
+  --color-chart-expense: var(--chart-expense);
+  --color-chart-part-1: var(--chart-part-1);
+  --color-chart-part-2: var(--chart-part-2);
+  --color-chart-part-3: var(--chart-part-3);
 }
 
 :root[data-theme="dark"] {
   --background: #0a0a0a;
   --foreground: #ededed;
+  --chart-income: #3c9ed4;
+  --chart-expense: #00669e;
+  --chart-part-1: #00669e;
+  --chart-part-2: #3c9ed4;
+  /* A third solid blue cannot be told apart in dark mode: part 3 is drawn hatched (see charts). */
+  --chart-part-3: #3c9ed4;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --chart-income: #3c9ed4;
+    --chart-expense: #00669e;
+    --chart-part-1: #00669e;
+    --chart-part-2: #3c9ed4;
+    /* A third solid blue cannot be told apart in dark mode: part 3 is drawn hatched (see charts). */
+    --chart-part-3: #3c9ed4;
   }
 }
 
