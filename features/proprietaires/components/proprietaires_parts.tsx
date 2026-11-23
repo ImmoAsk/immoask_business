@@ -1,6 +1,9 @@
 import { PropertyThumbnail } from "@/components/ui/property_thumbnail";
 import { cn } from "@/lib/cn";
 import { formatAmount } from "@/lib/utils/format";
+import { formatPhone } from "@/lib/utils/phone";
+
+export { formatPhone };
 import { lotCount } from "../hooks/proprietaires_money";
 import type { Proprietaire } from "../types";
 import { avatarTones, mandateTypes, profileLabels, reversementStatuses } from "./proprietaires_styles";
@@ -13,17 +16,6 @@ const MONTHS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "aoû
 export function formatTransferDate(isoDate: string) {
   const [year, month, day] = isoDate.split("-").map(Number);
   return `${day} ${MONTHS[month - 1]} ${year}`;
-}
-
-/** "+22890123456" → "+228 90 12 34 56"; "+33612345678" → "+33 6 12 34 56 78"; others kept as is. */
-export function formatPhone(phone: string) {
-  const togo = /^\+228(\d{2})(\d{2})(\d{2})(\d{2})$/.exec(phone);
-  if (togo) return `+228 ${togo.slice(1).join(" ")}`;
-  const europe = /^\+(33|32)(\d)(\d{2})(\d{2})(\d{2})(\d{2})$/.exec(phone);
-  if (europe) return `+${europe[1]} ${europe.slice(2).join(" ")}`;
-  const northAmerica = /^\+1(\d{3})(\d{3})(\d{4})$/.exec(phone);
-  if (northAmerica) return `+1 ${northAmerica.slice(1).join(" ")}`;
-  return phone;
 }
 
 /** "Résident · Lomé", "Diaspora · Paris" */

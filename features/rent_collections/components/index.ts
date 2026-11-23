@@ -1,0 +1,15 @@
+export { RentCollections } from "./rent_collections";
+export { RentCollectionsCard } from "./rent_collections_card";
+export type { RentCollectionsCardProps } from "./rent_collections_card";
+export { quittanceTable, RentCollectionsDetail } from "./rent_collections_detail";
+export type { RentCollectionsDetailProps } from "./rent_collections_detail";
+export { RentCollectionsFilters, RentCollectionsQuickFilters } from "./rent_collections_filters";
+export type { RentCollectionsFiltersProps, RentCollectionsQuickFiltersProps } from "./rent_collections_filters";
+export { RentCollectionsKpi } from "./rent_collections_kpi";
+export type { RentCollectionsKpiProps } from "./rent_collections_kpi";
+export { RentCollectionsPagination } from "./rent_collections_pagination";
+export type { RentCollectionsPaginationProps } from "./rent_collections_pagination";
+export { RentCollectionsSearch } from "./rent_collections_search";
+export type { RentCollectionsSearchProps } from "./rent_collections_search";
+export { rentCollectionsExportTable, RentCollectionsTable } from "./rent_collections_table";
+export type { RentCollectionsTableProps } from "./rent_collections_table";

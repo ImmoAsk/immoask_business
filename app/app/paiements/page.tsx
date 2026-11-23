@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { RentPayments } from "@/features/rent_payments";
 
 export const metadata: Metadata = {
-  title: "Paiements — ImmoAsk Business",
+  title: "Paiements de loyer — ImmoAsk Business",
 };
 
 export default function PaiementsPage() {
-  return <h1>Paiements</h1>;
+  return <RentPayments />;
 }

@@ -4,16 +4,13 @@ import type { IconName } from "@/components/ui/icon";
 import { PropertyThumbnail } from "@/components/ui/property_thumbnail";
 import { cn } from "@/lib/cn";
 import { formatAmount, MONTHS_SHORT } from "@/lib/utils/format";
+import { formatPhone } from "@/lib/utils/phone";
 import type { Locataire, LocatairePaymentChannel } from "../types";
 import { avatarTones, leaseTypes, paymentStatuses } from "./locataires_styles";
 
 // Small building blocks shared by the table, the list and the map popup.
 
-/** "+22890123456" → "+228 90 12 34 56" */
-export function formatPhone(phone: string) {
-  const match = /^\+228(\d{2})(\d{2})(\d{2})(\d{2})$/.exec(phone);
-  return match ? `+228 ${match.slice(1).join(" ")}` : phone;
-}
+export { formatPhone } from "@/lib/utils/phone";
 
 /** "2025-01-05" → "05 Janv." */
 export function formatDayMonth(isoDate: string) {

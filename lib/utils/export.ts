@@ -7,6 +7,8 @@ export type ExportTable = {
   title: string;
   header: string[];
   rows: ExportCell[][];
+  /** PDF footer; defaults to the row count. */
+  footer?: string;
 };
 
 function csvCell(value: ExportCell) {
@@ -46,7 +48,7 @@ function escapeHtml(value: ExportCell) {
  * Opens the browser's print dialog on a clean A4 landscape table; "Enregistrer au format PDF"
  * produces the file. Uses a hidden iframe, so no pop-up blocker is involved.
  */
-export function printPdf({ title, header, rows }: ExportTable) {
+export function printPdf({ title, header, rows, footer }: ExportTable) {
   const generated = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short" }).format(new Date());
   const html = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${escapeHtml(title)}</title>
 <style>
@@ -65,7 +67,7 @@ footer { margin-top: 10px; color: #71717a; }
 <header><h1>${escapeHtml(title)}</h1><span class="meta">ImmoAsk Business · ${escapeHtml(generated)}</span></header>
 <table><thead><tr>${header.map((cell) => `<th>${escapeHtml(cell)}</th>`).join("")}</tr></thead>
 <tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table>
-<footer>${rows.length} ligne${rows.length > 1 ? "s" : ""}</footer>
+<footer>${escapeHtml(footer ?? `${rows.length} ligne${rows.length > 1 ? "s" : ""}`)}</footer>
 </body></html>`;
 
   const frame = document.createElement("iframe");

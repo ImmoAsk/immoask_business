@@ -262,6 +262,13 @@ const paths = {
     </>
   ),
   externalLink: <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />,
+  pieChart: (
+    <>
+      <path d="M20.5 13.5A8.5 8.5 0 1 1 10.5 3.6" />
+      <path d="M13.5 3.6a8.5 8.5 0 0 1 6.9 6.9h-6.9z" />
+    </>
+  ),
+  message: <path d="M4.5 5.5h15a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1H10l-4.5 3.5V17h-1a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1zM8 10h8M8 13h5" />,
 } satisfies Record<string, ReactNode>;
 
 export type IconName = keyof typeof paths;
