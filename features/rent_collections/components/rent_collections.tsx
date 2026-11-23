@@ -67,7 +67,7 @@ export function RentCollections() {
         <RentCollectionsQuickFilters value={list.quick} options={list.quickOptions} onChange={list.setQuick} />
       </section>
 
-      <div className="grid items-start gap-6 min-[1600px]:grid-cols-[minmax(0,1fr)_380px]">
+      <div className="grid items-start gap-6 min-[100rem]:grid-cols-[minmax(0,1fr)_380px]">
         <RentCollectionsTable
           pageItems={list.pageItems}
           total={list.results.length}
@@ -83,7 +83,7 @@ export function RentCollections() {
             onPageSizeChange: list.setPageSize,
           }}
         />
-        <div id={DETAIL_ID} className="scroll-mt-24 min-[1600px]:sticky min-[1600px]:top-24">
+        <div id={DETAIL_ID} className="scroll-mt-24 min-[100rem]:sticky min-[100rem]:top-24">
           <RentCollectionsDetail collection={detail.selected} />
         </div>
       </div>
