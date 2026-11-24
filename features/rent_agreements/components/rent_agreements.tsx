@@ -1,9 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Icon } from "@/components/ui/icon";
-import { focusRing } from "@/components/ui/styles";
-import { cn } from "@/lib/cn";
 import { terminationEffectiveDate } from "../hooks/rent_agreements_status";
 import { useRentAgreementsData } from "../hooks/use_rent_agreements_data";
 import { useRentAgreementsKpis } from "../hooks/use_rent_agreements_kpis";
@@ -51,23 +48,11 @@ export function RentAgreements() {
 
   return (
     <div className="mx-auto flex max-w-[1400px] flex-col gap-8">
-      <header className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50">Contrats de location</h1>
-          <p className="mt-1 max-w-2xl text-sm text-zinc-500 dark:text-zinc-400">
-            Chaque location s&apos;appuie sur un contrat de gestion et un bien : suivez les loyers, les cautions et les échéances.
-          </p>
-        </div>
-        <button
-          type="button"
-          className={cn(
-            "inline-flex h-11 cursor-pointer items-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white shadow-[0_8px_20px_-8px_rgba(10,116,174,0.7)] hover:bg-brand-700 dark:bg-brand-500",
-            focusRing,
-          )}
-        >
-          <Icon name="plus" className="size-4" strokeWidth={2.6} />
-          Nouvelle location
-        </button>
+      <header>
+        <h1 className="text-2xl font-bold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50">Contrats de location</h1>
+        <p className="mt-1 max-w-2xl text-sm text-zinc-500 dark:text-zinc-400">
+          Chaque location s&apos;appuie sur un contrat de gestion et un bien : suivez les loyers, les cautions et les échéances.
+        </p>
       </header>
 
       <RentAgreementsKpi kpis={kpis} onShowFinished={() => list.setTab("termine")} onShowUpcoming={() => list.setTab("a_venir")} />
