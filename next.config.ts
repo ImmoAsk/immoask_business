@@ -9,8 +9,12 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   reactCompiler: true,
   redirects() {
-    // The back office has no index page: /app opens the dashboard.
-    return [{ source: "/app", destination: "/app/dashboard", permanent: false }];
+    return [
+      // The back office has no index page: /app opens the dashboard.
+      { source: "/app", destination: "/app/dashboard", permanent: false },
+      // "Contrats & Baux" was split into management and rent agreements; old links open the leases.
+      { source: "/app/contrats", destination: "/app/contrats-location", permanent: false },
+    ];
   },
   turbopack: {
     rules: {

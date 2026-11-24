@@ -33,8 +33,9 @@ export const APP_NAVIGATION: NavSection[] = [
     items: [
       { href: "/app/portofolio", label: "Portofolio", icon: "building" },
       { href: "/app/proprietaires", label: "Propriétaires", icon: "key" },
+      { href: "/app/contrats-gestion", label: "Contrats de gestion", icon: "clipboardCheck" },
       { href: "/app/locataires", label: "Locataires", icon: "users" },
-      { href: "/app/contrats", label: "Contrats & Baux", icon: "file" },
+      { href: "/app/contrats-location", label: "Contrats de location", icon: "file" },
       { href: "/app/inventaires", label: "Inventaires", icon: "clipboard" },
       { href: "/app/maintenances", label: "Maintenance", icon: "wrench" },
       { href: "/app/reservations", label: "Réservations", icon: "calendarCheck" },
