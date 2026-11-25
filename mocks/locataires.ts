@@ -1,5 +1,7 @@
 import type { Locataire, LocatairesData } from "@/features/locataires/types";
+import { splitByWeights } from "./split";
 
+// Each tenant sits under the management contract of the property they rent.
 // Placeholder tenants until lib/api/locataires is wired. Phone numbers are fictitious.
 
 const locataires: Locataire[] = [
@@ -9,6 +11,7 @@ const locataires: Locataire[] = [
     occupation: "Cadre Télécom",
     phone: "+22890123456",
     bien: { id: "bien_2041", title: "Villa Duplex N°2041", reference: "VD-204", kind: "villa", quartier: "Cité OUA", city: "Lomé", coordinates: { lat: 6.163, lng: 1.236 } },
+    management: { reference: "CG-2026-0002" },
     lease: { type: "residentiel", startDate: "2023-03-01", endDate: "2025-02-28" },
     rent: 650_000,
     payment: { status: "a_jour", channel: "virement", label: "Virement Ecobank" },
@@ -20,6 +23,7 @@ const locataires: Locataire[] = [
     occupation: "Pharmacienne",
     phone: "+22892458819",
     bien: { id: "bien_104", title: "Appartement T3 – La Grâce", reference: "APT-12", kind: "appartement", quartier: "Tokoin Casablanca", city: "Lomé", coordinates: { lat: 6.152, lng: 1.214 } },
+    management: { reference: "CG-2026-0001" },
     lease: { type: "residentiel", startDate: "2024-01-01", endDate: "2026-12-31" },
     rent: 220_000,
     payment: { status: "a_jour", channel: "mobile_money", label: "T-Money" },
@@ -31,6 +35,7 @@ const locataires: Locataire[] = [
     occupation: "Dir. M. Lawson",
     phone: "+22822210045",
     bien: { id: "bien_3308", title: "Magasin & Bureaux Grand Marché", reference: "CMM-02", kind: "immeuble", quartier: "Assiyéyé", city: "Lomé", coordinates: { lat: 6.232, lng: 1.203 } },
+    management: { reference: "CG-2026-0003" },
     lease: { type: "commercial", startDate: "2022-06-01", endDate: "2031-05-31" },
     rent: 1_200_000,
     payment: { status: "en_retard", channel: "virement", label: "Virement Orabank", daysLate: 8 },
@@ -42,6 +47,7 @@ const locataires: Locataire[] = [
     occupation: "Enseignant-Chercheur",
     phone: "+22891882311",
     bien: { id: "bien_1092", title: "Studio Meublé Baguida", reference: "ST-08", kind: "studio", quartier: "Baguida Plage", city: "Lomé", coordinates: { lat: 6.162, lng: 1.322 } },
+    management: { reference: "CG-2026-0005" },
     lease: { type: "residentiel", startDate: "2024-03-16", endDate: "2025-03-15" },
     rent: 160_000,
     payment: { status: "a_jour", channel: "mobile_money", label: "Flooz Moov" },
@@ -53,6 +59,7 @@ const locataires: Locataire[] = [
     occupation: "Commerçante Import",
     phone: "+22899332211",
     bien: { id: "bien_vj15", title: "Villa Basse Jardin 4P", reference: "VJ-15", kind: "villa", quartier: "Agoè Cacavéli", city: "Lomé", coordinates: { lat: 6.208, lng: 1.196 } },
+    management: { reference: "CG-2026-0002" },
     lease: { type: "residentiel", startDate: "2023-09-01", endDate: "2026-08-31" },
     rent: 380_000,
     payment: { status: "a_jour", channel: "mobile_money", label: "T-Money" },
@@ -64,6 +71,7 @@ const locataires: Locataire[] = [
     occupation: "Architecte DPLG",
     phone: "+22890776543",
     bien: { id: "bien_dd02", title: "Duplex B – Résidence Étoile", reference: "DD-02", kind: "villa", quartier: "Nyékonakpoè", city: "Lomé", coordinates: { lat: 6.138, lng: 1.203 } },
+    management: { reference: "CG-2026-0001" },
     lease: { type: "residentiel", startDate: "2024-05-01", endDate: "2027-04-30" },
     rent: 500_000,
     payment: { status: "a_jour", channel: "virement", label: "Virement Ecobank" },
@@ -75,6 +83,7 @@ const locataires: Locataire[] = [
     occupation: "Consultant IT",
     phone: "+22893110987",
     bien: { id: "bien_kpl01", title: "Appartement F2 Kpalimé", reference: "KPL-01", kind: "appartement", quartier: "Kpodzi", city: "Kpalimé", coordinates: { lat: 6.905, lng: 0.632 } },
+    management: { reference: "CG-2026-0005" },
     lease: { type: "residentiel", startDate: "2024-02-01", endDate: "2026-01-31" },
     rent: 110_000,
     payment: { status: "en_retard", channel: "mobile_money", label: "T-Money", daysLate: 3 },
@@ -86,6 +95,7 @@ const locataires: Locataire[] = [
     occupation: "Gérante Mme Adzo Kuma",
     phone: "+22822614477",
     bien: { id: "bien_0901", title: "Local Commercial R1", reference: "LC-R1", kind: "boutique", quartier: "Nyékonakpoè", city: "Lomé", coordinates: { lat: 6.134, lng: 1.209 } },
+    management: { reference: "CG-2026-0003" },
     lease: { type: "commercial", startDate: "2021-10-01", endDate: "2030-09-30" },
     rent: 250_000,
     payment: { status: "a_jour", channel: "virement", label: "Virement BOA" },
@@ -97,6 +107,7 @@ const locataires: Locataire[] = [
     occupation: "Commerce textile & pagnes",
     phone: "+22890556644",
     bien: { id: "bien_1088", title: "Boutique Grand Marché", reference: "BGM-04", kind: "boutique", quartier: "Grand Marché", city: "Lomé", coordinates: { lat: 6.131, lng: 1.222 } },
+    management: { reference: "CG-2026-0003" },
     lease: { type: "commercial", startDate: "2023-01-01", endDate: "2029-12-31" },
     rent: 320_000,
     payment: { status: "a_jour", channel: "virement", label: "Virement Ecobank" },
@@ -108,6 +119,7 @@ const locataires: Locataire[] = [
     occupation: "Médecin urgentiste",
     phone: "+22891203040",
     bien: { id: "bien_2210", title: "Appartement T4 Palm Beach", reference: "PB-T4", kind: "appartement", quartier: "Hédzranawoé", city: "Lomé", coordinates: { lat: 6.168, lng: 1.248 } },
+    management: { reference: "CG-2026-0001" },
     lease: { type: "residentiel", startDate: "2024-07-01", endDate: "2026-06-30" },
     rent: 300_000,
     payment: { status: "a_jour", channel: "mobile_money", label: "Flooz Moov" },
@@ -119,6 +131,7 @@ const locataires: Locataire[] = [
     occupation: "Infirmière CHU Sylvanus Olympio",
     phone: "+22898765432",
     bien: { id: "bien_0412", title: "Appartement N°04 – Résidence Tokoin", reference: "APT-04", kind: "appartement", quartier: "Tokoin", city: "Lomé", coordinates: { lat: 6.146, lng: 1.206 } },
+    management: { reference: "CG-2026-0001" },
     lease: { type: "residentiel", startDate: "2024-04-01", endDate: "2026-03-31" },
     rent: 40_000,
     payment: { status: "a_jour", channel: "mobile_money", label: "Mixx by Yas" },
@@ -130,6 +143,7 @@ const locataires: Locataire[] = [
     occupation: "Étudiante Université de Lomé",
     phone: "+22870112233",
     bien: { id: "bien_0222", title: "Studio Moderne B2", reference: "ST-B2", kind: "studio", quartier: "Agoè Nyivé", city: "Lomé", coordinates: { lat: 6.215, lng: 1.181 } },
+    management: { reference: "CG-2026-0002" },
     lease: { type: "residentiel", startDate: "2024-03-11", endDate: "2025-03-10" },
     rent: 40_000,
     payment: { status: "a_jour", channel: "mobile_money", label: "Flooz Moov" },
@@ -141,6 +155,7 @@ const locataires: Locataire[] = [
     occupation: "Ingénieur BTP",
     phone: "+22892334455",
     bien: { id: "bien_7720", title: "Villa Familiale 6 Pièces", reference: "VF-06", kind: "villa", quartier: "Adidogomé", city: "Lomé", coordinates: { lat: 6.186, lng: 1.153 } },
+    management: { reference: "CG-2026-0002" },
     lease: { type: "residentiel", startDate: "2024-03-01", endDate: "2027-02-28" },
     rent: 150_000,
     payment: { status: "a_jour", channel: "especes", label: "Espèces (agence)" },
@@ -152,6 +167,7 @@ const locataires: Locataire[] = [
     occupation: "Associée Mme Dzifa Amedjo",
     phone: "+22822258899",
     bien: { id: "bien_8850", title: "Bureaux Kégué – Lot 3", reference: "BK-03", kind: "immeuble", quartier: "Kégué", city: "Lomé", coordinates: { lat: 6.181, lng: 1.262 } },
+    management: { reference: "CG-2026-0007" },
     lease: { type: "commercial", startDate: "2023-11-01", endDate: "2032-10-31" },
     rent: 180_000,
     payment: { status: "a_jour", channel: "virement", label: "Virement Société Générale" },
@@ -159,9 +175,26 @@ const locataires: Locataire[] = [
   },
 ];
 
+/** Agency figures of the previous months, split per contract by this month's tenants. */
+const agencyActive = [10, 11, 11, 12, 12];
+const agencyUpToDate = [8, 9, 9, 10, 10];
+const contracts = [...new Set(locataires.map((locataire) => locataire.management.reference))].sort();
+const tenantsOf = (reference: string) => locataires.filter((locataire) => locataire.management.reference === reference);
+const activeShares = agencyActive.map((count) => splitByWeights(count, contracts.map((reference) => tenantsOf(reference).length)));
+const upToDateShares = agencyUpToDate.map((count, month) =>
+  // Never more tenants up to date than active ones in a contract.
+  splitByWeights(count, contracts.map((reference) => tenantsOf(reference).filter((locataire) => locataire.payment.status === "a_jour").length)).map(
+    (share, index) => Math.min(share, activeShares[month][index]),
+  ),
+);
+const history = contracts.map((management, index) => ({
+  management,
+  active: activeShares.map((month) => month[index]),
+  upToDate: upToDateShares.map((month) => month[index]),
+}));
+
 export const mockLocataires: LocatairesData = {
   asOf: "2025-01-20",
   locataires,
-  activeHistory: [10, 11, 11, 12, 12],
-  upToDateRateHistory: [80, 82, 83.3, 81.8, 83.3],
+  history,
 };

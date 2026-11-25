@@ -21,6 +21,8 @@ export type ComptabiliteOperation = {
   category: ComptabiliteCategory;
   description: string;
   bien: string;
+  /** Management contract whose books carry the operation. */
+  management: { reference: string };
   /** Tenant or supplier; absent for internal entries. */
   counterparty?: string;
   /** FCFA, always positive; `flow` gives the direction. */
@@ -33,4 +35,18 @@ export type ComptabiliteMonthTotals = {
   month: string;
   income: number;
   expenses: number;
+};
+
+/** A closed month in one management contract's books. */
+export type ComptabiliteContractMonth = ComptabiliteMonthTotals & {
+  /** Management contract reference. */
+  management: string;
+};
+
+/** Balance sheet totals, FCFA. */
+export type ComptabiliteLedger = { assets: number; liabilities: number };
+
+/** One management contract's balance sheet. */
+export type ComptabiliteContractLedger = ComptabiliteLedger & {
+  management: string;
 };

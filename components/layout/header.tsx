@@ -1,25 +1,32 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { Icon } from "@/components/ui/icon";
+import { Icon, type IconName } from "@/components/ui/icon";
 import { focusRing } from "@/components/ui/styles";
 import { cn } from "@/lib/cn";
 import { ThemeToggle } from "./theme_toggle";
 
 export type HeaderOption = { value: string; label: string };
 
+/** A pill-shaped select in the header (management contract, period). */
+export type HeaderSelect = {
+  /** Accessible name, e.g. "Contrat de gestion". */
+  label: string;
+  value: string;
+  options: HeaderOption[];
+  onChange: (value: string) => void;
+  disabled?: boolean;
+};
+
 export type HeaderProps = {
   /** Opens the mobile navigation drawer; the button only shows below `lg`. */
   onMenuClick?: () => void;
   searchPlaceholder?: string;
   onSearch?: (query: string) => void;
-  /** Scope filter shown as a pill (e.g. management contracts vs. leases). */
-  scopeOptions?: HeaderOption[];
-  scope?: string;
-  onScopeChange?: (value: string) => void;
-  /** Current period label, e.g. "Janvier 2025". */
-  periodLabel?: string;
-  onPeriodClick?: () => void;
+  /** Management contract the screens are narrowed to. */
+  contract?: HeaderSelect;
+  /** Month the screens are narrowed to. */
+  period?: HeaderSelect;
   hasUnreadNotifications?: boolean;
   onNotificationsClick?: () => void;
   /** Extra controls placed before the theme toggle and notification bell. */
@@ -37,11 +44,8 @@ export function Header({
   onMenuClick,
   searchPlaceholder = "Rechercher un locataire, lot, reçu…",
   onSearch,
-  scopeOptions,
-  scope,
-  onScopeChange,
-  periodLabel,
-  onPeriodClick,
+  contract,
+  period,
   hasUnreadNotifications = false,
   onNotificationsClick,
   actions,
@@ -93,39 +97,9 @@ export function Header({
       </form>
 
       <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
-        {scopeOptions && scopeOptions.length > 0 ? (
-          <label className={cn(pill, "relative hidden focus-within:ring-2 focus-within:ring-brand-500 md:inline-flex")}>
-            <Icon name="file" className="size-5 text-zinc-500" />
-            <span className="sr-only">Périmètre</span>
-            <select
-              defaultValue={scope}
-              onChange={(event) => onScopeChange?.(event.target.value)}
-              className="cursor-pointer appearance-none bg-transparent pr-6 outline-none"
-            >
-              {scopeOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <Icon
-              name="chevronDown"
-              className="pointer-events-none absolute right-4 size-4 text-zinc-500"
-            />
-          </label>
-        ) : null}
+        {contract ? <PillSelect select={contract} icon="file" className="hidden md:inline-flex" /> : null}
 
-        {periodLabel ? (
-          <button
-            type="button"
-            onClick={onPeriodClick}
-            className={cn(pill, "hidden sm:inline-flex", focusRing)}
-            aria-label={`Période : ${periodLabel}`}
-          >
-            <Icon name="calendar" className="size-5 text-zinc-500" />
-            {periodLabel}
-          </button>
-        ) : null}
+        {period ? <PillSelect select={period} icon="calendar" className="hidden sm:inline-flex" /> : null}
 
         {actions}
 
@@ -147,5 +121,36 @@ export function Header({
         </button>
       </div>
     </header>
+  );
+}
+
+function PillSelect({ select, icon, className }: { select: HeaderSelect; icon: IconName; className?: string }) {
+  const active = select.options[0]?.value !== select.value;
+  return (
+    <label
+      className={cn(
+        pill,
+        "relative min-w-0 focus-within:ring-2 focus-within:ring-brand-500",
+        active && "bg-brand-50 text-brand-800 hover:bg-brand-100 dark:bg-brand-900/50 dark:text-brand-100 dark:hover:bg-brand-900/70",
+        select.disabled && "opacity-70",
+        className,
+      )}
+    >
+      <Icon name={icon} className={cn("size-5 shrink-0", active ? "text-brand-600 dark:text-brand-200" : "text-zinc-500")} />
+      <select
+        aria-label={select.label}
+        value={select.value}
+        disabled={select.disabled}
+        onChange={(event) => select.onChange(event.target.value)}
+        className="max-w-52 cursor-pointer appearance-none truncate bg-transparent pr-6 font-medium outline-none disabled:cursor-wait xl:max-w-64"
+      >
+        {select.options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      <Icon name="chevronDown" className="pointer-events-none absolute right-4 size-4 text-zinc-500" />
+    </label>
   );
 }

@@ -12,3 +12,4 @@ export {
 } from "./use_portofolio_list";
 export type { UsePortofolioListResult } from "./use_portofolio_list";
 export { usePortofolioSelection } from "./use_portofolio_selection";
+export { usePortofolioInScope } from "./use_portofolio_scope";

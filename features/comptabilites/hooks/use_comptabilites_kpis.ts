@@ -4,7 +4,7 @@ import type {
   ComptabiliteKpis,
   ComptabiliteMonthPoint,
   ComptabiliteOperation,
-  ComptabilitesData,
+  ComptabilitesBooks,
   ComptabiliteTrend,
 } from "../types";
 import { COMPTABILITE_CATEGORIES, EXPENSE_CATEGORIES, INCOME_CATEGORIES } from "./comptabilites_categories";
@@ -22,7 +22,7 @@ function trend(history: number[]): ComptabiliteTrend {
 }
 
 /** Months of the chart: closed months, then the month in progress computed from its operations. */
-export function computeMonthlySeries(data: ComptabilitesData): ComptabiliteMonthPoint[] {
+export function computeMonthlySeries(data: ComptabilitesBooks): ComptabiliteMonthPoint[] {
   const income = sum(data.operations.filter((operation) => operation.flow === "recette"));
   const expenses = sum(data.operations.filter((operation) => operation.flow === "depense"));
   return [
@@ -59,7 +59,7 @@ export function computeBreakdown(
 }
 
 /** Cards, chart series and breakdowns, all derived from the same data. */
-export function computeComptabilitesKpis(data: ComptabilitesData) {
+export function computeComptabilitesKpis(data: ComptabilitesBooks) {
   const series = computeMonthlySeries(data);
   const kpis: ComptabiliteKpis = {
     income: trend(series.map((month) => month.income)),
@@ -75,7 +75,7 @@ export function computeComptabilitesKpis(data: ComptabilitesData) {
   };
 }
 
-export function useComptabilitesKpis(data: ComptabilitesData) {
+export function useComptabilitesKpis(data: ComptabilitesBooks) {
   return computeComptabilitesKpis(data);
 }
 

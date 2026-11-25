@@ -26,6 +26,8 @@ export type ProprietaireBien = {
   coordinates: MapCoordinates;
   /** Rentable units in the property. */
   lots: number;
+  /** Management contract the property is under. */
+  management: { reference: string };
   photoUrl?: string;
 };
 

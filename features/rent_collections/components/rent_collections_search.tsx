@@ -22,7 +22,7 @@ export function RentCollectionsSearch({ query, onQueryChange, className }: RentC
         type="search"
         value={query}
         onChange={(event) => onQueryChange(event.target.value)}
-        placeholder="Locataire, bien, quittance (#ENC-2025)"
+        placeholder="Locataire, bien, quittance (#ENC-2026)"
         className={cn(rentCollectionsControl, focusRing, "w-full pr-4 pl-12 placeholder:text-zinc-400")}
       />
     </form>

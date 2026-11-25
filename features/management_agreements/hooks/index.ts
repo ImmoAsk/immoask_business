@@ -8,3 +8,4 @@ export { useManagementAgreementsStore } from "./use_management_agreements_store"
 export type { UseManagementAgreementsStoreResult } from "./use_management_agreements_store";
 export { useManagementAgreementsSelection } from "./use_management_agreements_selection";
 export type { UseManagementAgreementsSelectionResult } from "./use_management_agreements_selection";
+export { useManagementAgreementsInScope } from "./use_management_agreements_scope";

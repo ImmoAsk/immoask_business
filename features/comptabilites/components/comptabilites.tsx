@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { WorkspaceScopeNotice } from "@/features/workspace/components";
 import { useComptabilitesData } from "../hooks/use_comptabilites_data";
 import { useComptabilitesKpis } from "../hooks/use_comptabilites_kpis";
 import { useComptabilitesList } from "../hooks/use_comptabilites_list";
+import { useComptabilitesInScope } from "../hooks/use_comptabilites_scope";
 import type { ComptabiliteView } from "../types";
 import { ComptabilitesBreakdown } from "./comptabilites_breakdown";
 import { ComptabilitesCategoryChart } from "./comptabilites_category_chart";
@@ -17,8 +19,10 @@ import { ComptabilitesTable } from "./comptabilites_table";
 /** Accounting page: monthly figures, trends, breakdowns and the operations of the month. */
 export function Comptabilites() {
   const { data } = useComptabilitesData();
-  const { kpis, series, incomeBreakdown, expenseBreakdown } = useComptabilitesKpis(data);
-  const list = useComptabilitesList(data.operations, data.asOf);
+  // The header's management contract decides whose books are shown.
+  const books = useComptabilitesInScope(data);
+  const { kpis, series, incomeBreakdown, expenseBreakdown } = useComptabilitesKpis(books);
+  const list = useComptabilitesList(books.operations, books.asOf);
   const [view, setView] = useState<ComptabiliteView>("tableau");
   const [advancedOpen, setAdvancedOpen] = useState(false);
 
@@ -29,6 +33,7 @@ export function Comptabilites() {
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
           Recettes, dépenses et solde de {monthLong(data.asOf.slice(0, 7))}, opération par opération.
         </p>
+        <WorkspaceScopeNotice className="mt-3" />
       </header>
 
       <ComptabilitesKpi kpis={kpis} />

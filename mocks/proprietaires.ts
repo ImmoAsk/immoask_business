@@ -3,6 +3,52 @@ import type { Proprietaire, ProprietaireBien, ProprietairesData } from "@/featur
 
 // Placeholder owners until lib/api/proprietaires is wired. Names and phone numbers are fictitious.
 
+/** Management contract of each property, consistent with the other screens' mocks. */
+const managementByBien: Record<string, string> = {
+  "vd-204": "CG-2026-0002",
+  "apt-12": "CG-2026-0001",
+  "st-08": "CG-2026-0005",
+  "bgm-04": "CG-2026-0003",
+  "im-21": "CG-2026-0005",
+  "vj-15": "CG-2026-0002",
+  "lc-r1": "CG-2026-0003",
+  "dd-02": "CG-2026-0001",
+  "pb-t4": "CG-2026-0001",
+  "ap-k1": "CG-2026-0003",
+  "st-b2": "CG-2026-0002",
+  "cmm-02": "CG-2026-0003",
+  "bk-03": "CG-2026-0007",
+  "rg-01": "CG-2026-0005",
+  "bt-07": "CG-2026-0003",
+  "vl-11": "CG-2026-0007",
+  "tr-30": "CG-2026-0008",
+  "vf-06": "CG-2026-0002",
+  "apt-04": "CG-2026-0001",
+  "st-19": "CG-2026-0005",
+  "vs-02": "CG-2026-0004",
+  "ap-07": "CG-2026-0005",
+  "vd-31": "CG-2026-0005",
+  "ap-22": "CG-2026-0005",
+  "ch-05": "CG-2026-0002",
+  "vb-09": "CG-2026-0005",
+  "bq-02": "CG-2026-0005",
+  "ti-01": "CG-2026-0007",
+  "ti-02": "CG-2026-0007",
+  "ti-03": "CG-2026-0007",
+  "ti-04": "CG-2026-0003",
+  "va-01": "CG-2026-0006",
+  "st-33": "CG-2026-0006",
+  "vs-12": "CG-2026-0007",
+  "ap-30": "CG-2026-0008",
+  "vd-44": "CG-2026-0004",
+  "bt-15": "CG-2026-0003",
+  "vb-18": "CG-2026-0006",
+  "vt-01": "CG-2026-0004",
+  "ap-41": "CG-2026-0005",
+  "st-40": "CG-2026-0005",
+  "vl-27": "CG-2026-0008",
+};
+
 function bien(
   id: string,
   title: string,
@@ -13,7 +59,7 @@ function bien(
   lng: number,
   lots: number,
 ): ProprietaireBien {
-  return { id, title, reference: id.toUpperCase(), kind, quartier, city, coordinates: { lat, lng }, lots };
+  return { id, title, reference: id.toUpperCase(), kind, quartier, city, coordinates: { lat, lng }, lots, management: { reference: managementByBien[id] } };
 }
 
 const proprietaires: Proprietaire[] = [
@@ -301,8 +347,17 @@ const proprietaires: Proprietaire[] = [
   },
 ];
 
+/** Owners of the previous months, agency-wide and per contract (scaled by this month's owners of each contract). */
+const agencyOwners = [15, 16, 16, 17, 17];
+const contracts = [...new Set(proprietaires.flatMap((proprietaire) => proprietaire.biens.map((bien) => bien.management.reference)))].sort();
+const contractOwnersHistory = contracts.map((management) => {
+  const owners = proprietaires.filter((proprietaire) => proprietaire.biens.some((bien) => bien.management.reference === management)).length;
+  return { management, owners: agencyOwners.map((count) => Math.max(1, Math.round((count * owners) / proprietaires.length))) };
+});
+
 export const mockProprietaires: ProprietairesData = {
   asOf: "2025-01-20",
   proprietaires,
-  ownersHistory: [15, 16, 16, 17, 17],
+  ownersHistory: agencyOwners,
+  contractOwnersHistory,
 };

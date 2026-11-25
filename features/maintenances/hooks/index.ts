@@ -8,3 +8,4 @@ export { useMaintenancesSelection } from "./use_maintenances_selection";
 export type { UseMaintenancesSelectionResult } from "./use_maintenances_selection";
 export { useMaintenancesStore } from "./use_maintenances_store";
 export type { UseMaintenancesStoreResult } from "./use_maintenances_store";
+export { useMaintenancesInScope } from "./use_maintenances_scope";

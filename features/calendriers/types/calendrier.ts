@@ -9,6 +9,8 @@ export type CalendrierBien = {
   quartier: string;
   city: string;
   photoUrl?: string;
+  /** Management contract the property is under; the header's contract narrows the list to it. */
+  management: { reference: string };
 };
 
 /** Why a property is blocked. */

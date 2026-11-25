@@ -14,3 +14,4 @@ export {
 export type { UseLocatairesListResult } from "./use_locataires_list";
 export { useLocatairesSelection } from "./use_locataires_selection";
 export type { UseLocatairesSelectionResult } from "./use_locataires_selection";
+export { useLocatairesInScope } from "./use_locataires_scope";

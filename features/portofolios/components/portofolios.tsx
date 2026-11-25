@@ -1,10 +1,12 @@
 "use client";
 
+import { WorkspaceScopeNotice } from "@/features/workspace/components";
 import { useState } from "react";
 import { cn } from "@/lib/cn";
 import { usePortofolioData } from "../hooks/use_portofolio_data";
 import { usePortofolioKpis } from "../hooks/use_portofolio_kpis";
 import { DEFAULT_PORTOFOLIO_FILTERS, usePortofolioList } from "../hooks/use_portofolio_list";
+import { usePortofolioInScope } from "../hooks/use_portofolio_scope";
 import { usePortofolioSelection } from "../hooks/use_portofolio_selection";
 import type { PortofolioView } from "../types";
 import { PortofoliosAdvancedSearch } from "./portofolios_advanced_search";
@@ -18,8 +20,9 @@ import { portofolioPanel } from "./portofolios_styles";
 /** Portfolio page: KPIs, search & filters, then a table or a list beside a map. */
 export function Portofolios() {
   const { data } = usePortofolioData();
-  const kpis = usePortofolioKpis(data.biens, data.revenueHistory);
-  const list = usePortofolioList(data.biens);
+  const { biens, revenueHistory } = usePortofolioInScope(data);
+  const kpis = usePortofolioKpis(biens, revenueHistory);
+  const list = usePortofolioList(biens);
   const selection = usePortofolioSelection(list.results.map((bien) => bien.id));
   const [view, setView] = useState<PortofolioView>("tableau");
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -40,6 +43,7 @@ export function Portofolios() {
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
           Vos biens, leur occupation et leurs loyers en un coup d&apos;œil.
         </p>
+        <WorkspaceScopeNotice className="mt-3" />
       </header>
 
       <PortofoliosKpi

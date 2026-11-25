@@ -8,3 +8,4 @@ export { useReservationsSelection } from "./use_reservations_selection";
 export type { UseReservationsSelectionResult } from "./use_reservations_selection";
 export { useReservationsStore } from "./use_reservations_store";
 export type { UseReservationsStoreResult } from "./use_reservations_store";
+export { useReservationsInScope } from "./use_reservations_scope";

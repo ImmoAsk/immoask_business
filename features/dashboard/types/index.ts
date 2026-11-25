@@ -9,6 +9,7 @@ export type * from "./dashboard_action_reminder";
 export type * from "./dashboard_encaissement";
 export type * from "./dashboard_greeting";
 export type * from "./dashboard_kpi";
+export type * from "./dashboard_query";
 export type * from "./dashboard_recent_encaissement";
 export type * from "./dashboard_versement";
 

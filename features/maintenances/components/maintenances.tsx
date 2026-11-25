@@ -1,10 +1,12 @@
 "use client";
 
+import { WorkspaceScopeNotice } from "@/features/workspace/components";
 import { useRef, useState } from "react";
 import { nextStatus } from "../hooks/maintenances_age";
 import { useMaintenancesData } from "../hooks/use_maintenances_data";
 import { useMaintenancesKpis } from "../hooks/use_maintenances_kpis";
 import { useMaintenancesList } from "../hooks/use_maintenances_list";
+import { useMaintenancesInScope } from "../hooks/use_maintenances_scope";
 import { useMaintenancesSelection } from "../hooks/use_maintenances_selection";
 import { useMaintenancesStore } from "../hooks/use_maintenances_store";
 import type { Maintenance } from "../types";
@@ -19,8 +21,9 @@ const DETAIL_ID = "maintenance-detail";
 export function Maintenances() {
   const { data } = useMaintenancesData();
   const store = useMaintenancesStore(data.maintenances);
-  const kpis = useMaintenancesKpis(store.maintenances, data.asOf, data.newHistory);
-  const list = useMaintenancesList(store.maintenances, data.asOf);
+  const maintenances = useMaintenancesInScope(store.maintenances);
+  const kpis = useMaintenancesKpis(maintenances, data.asOf, data.newHistory);
+  const list = useMaintenancesList(maintenances, data.asOf);
   const selection = useMaintenancesSelection(list.results.map((maintenance) => maintenance.id));
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -51,6 +54,7 @@ export function Maintenances() {
         <p className="mt-1 max-w-2xl text-sm text-zinc-500 dark:text-zinc-400">
           Suivez les demandes d&apos;intervention sur vos biens, de la création à la résolution, avec leur photo et leur catégorie.
         </p>
+        <WorkspaceScopeNotice className="mt-3" />
       </header>
 
       <MaintenancesKpi

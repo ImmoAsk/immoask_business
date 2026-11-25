@@ -1,10 +1,12 @@
 "use client";
 
+import { WorkspaceScopeNotice } from "@/features/workspace/components";
 import { useRef, useState } from "react";
 import { terminationEffectiveDate } from "../hooks/management_agreements_money";
 import { useManagementAgreementsData } from "../hooks/use_management_agreements_data";
 import { useManagementAgreementsKpis } from "../hooks/use_management_agreements_kpis";
 import { DEFAULT_MANAGEMENT_FILTERS, useManagementAgreementsList } from "../hooks/use_management_agreements_list";
+import { useManagementAgreementsInScope } from "../hooks/use_management_agreements_scope";
 import { useManagementAgreementsSelection } from "../hooks/use_management_agreements_selection";
 import { useManagementAgreementsStore } from "../hooks/use_management_agreements_store";
 import type { ManagementAgreement } from "../types";
@@ -20,8 +22,9 @@ const DETAIL_ID = "management-agreement-detail";
 export function ManagementAgreements() {
   const { data } = useManagementAgreementsData();
   const store = useManagementAgreementsStore(data.agreements, data.availableBiens);
-  const kpis = useManagementAgreementsKpis(store.agreements, data.activeHistory);
-  const list = useManagementAgreementsList(store.agreements);
+  const agreements = useManagementAgreementsInScope(store.agreements);
+  const kpis = useManagementAgreementsKpis(agreements, data.activeHistory);
+  const list = useManagementAgreementsList(agreements);
   const selection = useManagementAgreementsSelection(list.results.map((agreement) => agreement.id));
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -53,6 +56,7 @@ export function ManagementAgreements() {
         <p className="mt-1 max-w-2xl text-sm text-zinc-500 dark:text-zinc-400">
           Suivez les mandats confiés à l&apos;agence, la rémunération du gestionnaire et les biens affectés à chaque propriétaire.
         </p>
+        <WorkspaceScopeNotice className="mt-3" />
       </header>
 
       <ManagementAgreementsKpi

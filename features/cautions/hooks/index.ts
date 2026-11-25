@@ -17,3 +17,4 @@ export { useCautionsSelection } from "./use_cautions_selection";
 export type { UseCautionsSelectionResult } from "./use_cautions_selection";
 export { useCautionsStore } from "./use_cautions_store";
 export type { UseCautionsStoreResult } from "./use_cautions_store";
+export { useCautionsInScope } from "./use_cautions_scope";

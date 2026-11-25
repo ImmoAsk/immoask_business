@@ -35,6 +35,8 @@ export type Locataire = {
   /** International format without spaces, e.g. "+22890123456". */
   phone: string;
   bien: LocataireBien;
+  /** Management contract of the rented property; the header's contract narrows the list to it. */
+  management: { reference: string };
   lease: {
     type: LocataireLeaseType;
     /** ISO dates "YYYY-MM-DD". */

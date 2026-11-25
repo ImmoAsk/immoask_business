@@ -27,7 +27,8 @@ export function useCalendriersBiens(biens: CalendrierBien[], periods: Calendrier
     filter,
     setFilter,
     results,
-    selected: biens.find((bien) => bien.id === selectedId) ?? null,
+    // A property the header's contract no longer lists gives way to the first one that is.
+    selected: biens.find((bien) => bien.id === selectedId) ?? biens[0] ?? null,
     select: setSelectedId,
     availabilityToday: (bienId: string) => availabilityOn(periods, bienId, asOf),
   };

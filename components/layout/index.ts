@@ -2,7 +2,7 @@ export { AppShell } from "@/components/layout/app_shell";
 export type { AppShellProps } from "@/components/layout/app_shell";
 
 export { Header } from "@/components/layout/header";
-export type { HeaderOption, HeaderProps } from "@/components/layout/header";
+export type { HeaderOption, HeaderProps, HeaderSelect } from "@/components/layout/header";
 
 export { APP_NAVIGATION, Navigation, isActivePath } from "@/components/layout/navigation";
 export type { NavBadge, NavItem, NavSection, NavigationProps } from "@/components/layout/navigation";

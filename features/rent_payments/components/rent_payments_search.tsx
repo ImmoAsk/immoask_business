@@ -22,7 +22,7 @@ export function RentPaymentsSearch({ query, onQueryChange, className }: RentPaym
         type="search"
         value={query}
         onChange={(event) => onQueryChange(event.target.value)}
-        placeholder="Locataire, téléphone, quittance (#PAY-2025)"
+        placeholder="Locataire, téléphone, quittance (#PAY-2026)"
         className={cn(rentPaymentsControl, focusRing, "w-full pr-4 pl-12 placeholder:text-zinc-400")}
       />
     </form>

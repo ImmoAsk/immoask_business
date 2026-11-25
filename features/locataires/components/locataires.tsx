@@ -1,11 +1,13 @@
 "use client";
 
+import { WorkspaceScopeNotice } from "@/features/workspace/components";
 import { useState } from "react";
 import { cn } from "@/lib/cn";
 import { isLeaseEndingSoon } from "../hooks/locataires_dates";
 import { useLocatairesData } from "../hooks/use_locataires_data";
 import { useLocatairesKpis } from "../hooks/use_locataires_kpis";
 import { DEFAULT_LOCATAIRE_FILTERS, useLocatairesList } from "../hooks/use_locataires_list";
+import { useLocatairesInScope } from "../hooks/use_locataires_scope";
 import { useLocatairesSelection } from "../hooks/use_locataires_selection";
 import type { LocataireView } from "../types";
 import { LocatairesCard } from "./locataires_card";
@@ -20,8 +22,9 @@ import { LocatairesTable } from "./locataires_table";
 /** Tenants page: KPIs, search & filters, then a table or a list beside a map. */
 export function Locataires() {
   const { data } = useLocatairesData();
-  const kpis = useLocatairesKpis(data.locataires, data.asOf, data.activeHistory, data.upToDateRateHistory);
-  const list = useLocatairesList(data.locataires, data.asOf);
+  const { locataires, activeHistory, upToDateRateHistory } = useLocatairesInScope(data);
+  const kpis = useLocatairesKpis(locataires, data.asOf, activeHistory, upToDateRateHistory);
+  const list = useLocatairesList(locataires, data.asOf);
   const selection = useLocatairesSelection(list.results.map((locataire) => locataire.id));
   const [view, setView] = useState<LocataireView>("tableau");
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -45,6 +48,7 @@ export function Locataires() {
       <header>
         <h1 className="text-2xl font-bold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50">Locataires</h1>
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Suivez et gérez facilement tous vos locataires.</p>
+        <WorkspaceScopeNotice className="mt-3" />
       </header>
 
       <LocatairesKpi

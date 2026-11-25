@@ -16,3 +16,4 @@ export {
   useComptabilitesList,
 } from "./use_comptabilites_list";
 export type { UseComptabilitesListResult } from "./use_comptabilites_list";
+export { useComptabilitesInScope } from "./use_comptabilites_scope";

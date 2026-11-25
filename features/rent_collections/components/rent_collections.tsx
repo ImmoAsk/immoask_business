@@ -1,10 +1,12 @@
 "use client";
 
+import { WorkspaceScopeNotice } from "@/features/workspace/components";
 import { ExportActions } from "@/components/ui/export_actions";
 import { useRentCollectionsData } from "../hooks/use_rent_collections_data";
 import { useRentCollectionsDetail } from "../hooks/use_rent_collections_detail";
 import { useRentCollectionsKpis } from "../hooks/use_rent_collections_kpis";
 import { DEFAULT_RENT_COLLECTION_FILTERS, useRentCollectionsList } from "../hooks/use_rent_collections_list";
+import { useRentCollectionsInScope } from "../hooks/use_rent_collections_scope";
 import type { RentCollection } from "../types";
 import { RentCollectionsDetail } from "./rent_collections_detail";
 import { RentCollectionsFilters, RentCollectionsQuickFilters } from "./rent_collections_filters";
@@ -17,8 +19,9 @@ const DETAIL_ID = "rent-collection-detail";
 /** Rent collections page: KPIs, search & filters, the payments table and the selected payment's breakdown. */
 export function RentCollections() {
   const { data } = useRentCollectionsData();
-  const kpis = useRentCollectionsKpis(data.collections, data.previousMonthRent, data.escrowActive);
-  const list = useRentCollectionsList(data.collections);
+  const { collections, previousMonthRent } = useRentCollectionsInScope(data);
+  const kpis = useRentCollectionsKpis(collections, previousMonthRent, data.escrowActive);
+  const list = useRentCollectionsList(collections);
   const detail = useRentCollectionsDetail(list.pageItems);
 
   const select = (collection: RentCollection) => {
@@ -36,6 +39,7 @@ export function RentCollections() {
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
           Loyers, charges et cautions reçus, quittance par quittance.
         </p>
+        <WorkspaceScopeNotice className="mt-3" />
       </header>
 
       <RentCollectionsKpi

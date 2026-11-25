@@ -22,3 +22,4 @@ export {
   useRentCollectionsList,
 } from "./use_rent_collections_list";
 export type { UseRentCollectionsListResult } from "./use_rent_collections_list";
+export { useRentCollectionsInScope } from "./use_rent_collections_scope";

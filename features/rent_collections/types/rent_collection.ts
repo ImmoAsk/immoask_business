@@ -7,7 +7,7 @@ export type RentCollectionChargeType = "eau" | "electricite" | "entretien";
 
 export type RentCollectionLine = {
   kind: RentCollectionLineKind;
-  /** e.g. "Loyer janvier 2025", "Électricité", "Caution (3 mois)". */
+  /** e.g. "Loyer novembre 2026", "Électricité", "Caution (3 mois)". */
   label: string;
   /** FCFA */
   amount: number;
@@ -27,7 +27,7 @@ export type RentCollectionStatus = "encaisse" | "recu_genere" | "en_attente" | "
 
 export type RentCollection = {
   id: string;
-  /** "ENC-2025-084" */
+  /** "ENC-2026-084" */
   reference: string;
   /** Payment date, or due date when not received. ISO "YYYY-MM-DD". */
   date: string;
@@ -42,6 +42,8 @@ export type RentCollection = {
     quartier: string;
     city: string;
   };
+  /** Management contract the property is under; the header's contract narrows the list to it. */
+  management: { reference: string };
   lines: RentCollectionLine[];
   channel: RentCollectionChannel;
   /** e.g. "Virement Ecobank", "T-Money". */

@@ -14,3 +14,4 @@ export { useRentAgreementsSelection } from "./use_rent_agreements_selection";
 export type { UseRentAgreementsSelectionResult } from "./use_rent_agreements_selection";
 export { useRentAgreementsStore } from "./use_rent_agreements_store";
 export type { UseRentAgreementsStoreResult } from "./use_rent_agreements_store";
+export { useRentAgreementsInScope } from "./use_rent_agreements_scope";

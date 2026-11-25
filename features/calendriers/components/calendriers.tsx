@@ -1,5 +1,6 @@
 "use client";
 
+import { WorkspaceScopeNotice } from "@/features/workspace/components";
 import { addDays, diffDays } from "../hooks/calendriers_dates";
 import { useCalendriersBiens } from "../hooks/use_calendriers_biens";
 import { useCalendriersData } from "../hooks/use_calendriers_data";
@@ -7,6 +8,7 @@ import { useCalendriersDraft } from "../hooks/use_calendriers_draft";
 import { useCalendriersKpis } from "../hooks/use_calendriers_kpis";
 import { useCalendriersNavigation } from "../hooks/use_calendriers_navigation";
 import { useCalendriersPeriods } from "../hooks/use_calendriers_periods";
+import { useCalendriersInScope } from "../hooks/use_calendriers_scope";
 import { CalendriersBienList } from "./calendriers_bien_list";
 import { CalendriersCalendar } from "./calendriers_calendar";
 import { CalendriersKpi } from "./calendriers_kpi";
@@ -18,9 +20,11 @@ export function Calendriers() {
   const { data } = useCalendriersData();
   const { periods, add, remove } = useCalendriersPeriods(data.periods);
   const navigation = useCalendriersNavigation(data.asOf);
-  const biens = useCalendriersBiens(data.biens, periods, data.asOf);
+  // Properties of the header's management contract, and their blocked periods.
+  const scoped = useCalendriersInScope(data.biens, periods);
+  const biens = useCalendriersBiens(scoped.biens, scoped.periods, data.asOf);
   const draft = useCalendriersDraft();
-  const kpis = useCalendriersKpis(data.biens, periods, data.asOf, navigation.month);
+  const kpis = useCalendriersKpis(scoped.biens, scoped.periods, data.asOf, navigation.month);
 
   // Every day the form would block, to highlight it on the calendar.
   const draftDays = draft.ranges.flatMap(([start, end]) =>
@@ -36,6 +40,7 @@ export function Calendriers() {
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
           Gérez la disponibilité de vos biens immobiliers et évitez les doubles réservations.
         </p>
+        <WorkspaceScopeNotice className="mt-3" />
       </header>
 
       <CalendriersKpi kpis={kpis} month={navigation.month} />
@@ -58,8 +63,8 @@ export function Calendriers() {
       </div>
 
       <CalendriersUpcoming
-        biens={data.biens}
-        periods={periods}
+        biens={scoped.biens}
+        periods={scoped.periods}
         asOf={data.asOf}
         onView={(period) => {
           biens.select(period.bienId);

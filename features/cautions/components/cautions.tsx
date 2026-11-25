@@ -1,10 +1,12 @@
 "use client";
 
+import { WorkspaceScopeNotice } from "@/features/workspace/components";
 import { useRef, useState } from "react";
 import { usedAmount } from "../hooks/cautions_balance";
 import { useCautionsData } from "../hooks/use_cautions_data";
 import { useCautionsKpis } from "../hooks/use_cautions_kpis";
 import { useCautionsList } from "../hooks/use_cautions_list";
+import { useCautionsInScope } from "../hooks/use_cautions_scope";
 import { useCautionsSelection } from "../hooks/use_cautions_selection";
 import { useCautionsStore } from "../hooks/use_cautions_store";
 import type { Caution } from "../types";
@@ -20,8 +22,9 @@ const DETAIL_ID = "caution-detail";
 export function Cautions() {
   const { data } = useCautionsData();
   const store = useCautionsStore(data.cautions);
-  const kpis = useCautionsKpis(store.cautions, data.heldHistory);
-  const list = useCautionsList(store.cautions, data.asOf);
+  const cautions = useCautionsInScope(store.cautions);
+  const kpis = useCautionsKpis(cautions, data.heldHistory);
+  const list = useCautionsList(cautions, data.asOf);
   const selection = useCautionsSelection(list.results.map((caution) => caution.id));
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -52,6 +55,7 @@ export function Cautions() {
         <p className="mt-1 max-w-2xl text-sm text-zinc-500 dark:text-zinc-400">
           Suivez le coffre de chaque locataire : la caution déposée, ce qui a servi à payer des loyers et ce qui reste à reconstituer.
         </p>
+        <WorkspaceScopeNotice className="mt-3" />
       </header>
 
       <CautionsKpi kpis={kpis} onShowModified={() => list.setTab("modifiee")} />

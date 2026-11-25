@@ -11,4 +11,9 @@ export type ProprietairesData = {
   proprietaires: Proprietaire[];
   /** Owners in the previous months, oldest first. */
   ownersHistory: number[];
+  /**
+   * Owners in the previous months for each management contract, oldest first.
+   * An owner with properties under several contracts counts in each, so these do not add up to `ownersHistory`.
+   */
+  contractOwnersHistory: { management: string; owners: number[] }[];
 };

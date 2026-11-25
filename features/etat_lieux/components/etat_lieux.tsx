@@ -1,10 +1,12 @@
 "use client";
 
+import { WorkspaceScopeNotice } from "@/features/workspace/components";
 import { useRef, useState } from "react";
 import { inventoryLines } from "../hooks/etat_lieux_items";
 import { useEtatLieuxData } from "../hooks/use_etat_lieux_data";
 import { useEtatLieuxKpis } from "../hooks/use_etat_lieux_kpis";
 import { useEtatLieuxList } from "../hooks/use_etat_lieux_list";
+import { useEtatLieuxInScope } from "../hooks/use_etat_lieux_scope";
 import { useEtatLieuxSelection } from "../hooks/use_etat_lieux_selection";
 import type { InventoryLine } from "../types";
 import { EtatLieuxDetail } from "./etat_lieux_detail";
@@ -17,9 +19,12 @@ const DETAIL_ID = "etat-lieux-detail";
 /** "Inventaires": move-in and move-out inventories, item by item, with photos. */
 export function EtatLieux() {
   const { data } = useEtatLieuxData();
+  // Every line stays available to compare an exit with its entry, even outside the selected month.
   const lines = inventoryLines(data.inventories);
-  const kpis = useEtatLieuxKpis(data.inventories, lines, data.history);
-  const list = useEtatLieuxList(lines);
+  const inventories = useEtatLieuxInScope(data.inventories);
+  const scopedLines = inventoryLines(inventories);
+  const kpis = useEtatLieuxKpis(inventories, scopedLines, data.history);
+  const list = useEtatLieuxList(scopedLines);
   const selection = useEtatLieuxSelection(list.results.map((line) => line.id));
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -51,6 +56,7 @@ export function EtatLieux() {
           Documentez l&apos;état de chaque élément d&apos;un bien à l&apos;entrée et à la sortie du locataire, photos à l&apos;appui, pour comparer et
           chiffrer les dégradations.
         </p>
+        <WorkspaceScopeNotice className="mt-3" />
       </header>
 
       <EtatLieuxKpi kpis={kpis} onShowDamaged={() => list.setTab("endommage")} />

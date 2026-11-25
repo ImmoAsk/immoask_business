@@ -31,6 +31,8 @@ export type PortofolioBien = {
   title: string;
   type: PortofolioBienType;
   ownerName: string;
+  /** Management contract the property is under; the header's contract narrows the list to it. */
+  management: { reference: string };
   location: {
     quartier: string;
     city: string;

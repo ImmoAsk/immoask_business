@@ -6,3 +6,4 @@ export { DEFAULT_VERSEMENT_FILTERS, useVersementsList } from "./use_versements_l
 export type { UseVersementsListResult } from "./use_versements_list";
 export { useVersementsSelection } from "./use_versements_selection";
 export type { UseVersementsSelectionResult } from "./use_versements_selection";
+export { useVersementsInScope } from "./use_versements_scope";

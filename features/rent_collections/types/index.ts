@@ -9,8 +9,8 @@ export type RentCollectionsData = {
   /** Reference day, ISO "YYYY-MM-DD". */
   asOf: string;
   collections: RentCollection[];
-  /** Rent received last month, FCFA (for the trend). */
-  previousMonthRent: number | null;
+  /** Rent received last month, per management contract, FCFA (for the trend). */
+  previousMonthRents: { management: string; amount: number }[];
   /** Deposits are held on an escrow account. */
   escrowActive: boolean;
 };

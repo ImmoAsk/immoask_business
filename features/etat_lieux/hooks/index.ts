@@ -6,3 +6,4 @@ export { DEFAULT_INVENTORY_FILTERS, useEtatLieuxList } from "./use_etat_lieux_li
 export type { UseEtatLieuxListResult } from "./use_etat_lieux_list";
 export { useEtatLieuxSelection } from "./use_etat_lieux_selection";
 export type { UseEtatLieuxSelectionResult } from "./use_etat_lieux_selection";
+export { useEtatLieuxInScope } from "./use_etat_lieux_scope";

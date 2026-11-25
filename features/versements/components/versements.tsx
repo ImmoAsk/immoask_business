@@ -1,9 +1,11 @@
 "use client";
 
+import { WorkspaceScopeNotice } from "@/features/workspace/components";
 import { useRef, useState } from "react";
 import { useVersementsData } from "../hooks/use_versements_data";
 import { useVersementsKpis } from "../hooks/use_versements_kpis";
 import { useVersementsList } from "../hooks/use_versements_list";
+import { useVersementsInScope } from "../hooks/use_versements_scope";
 import { useVersementsSelection } from "../hooks/use_versements_selection";
 import type { Versement } from "../types";
 import { VersementsDetail } from "./versements_detail";
@@ -16,8 +18,9 @@ const DETAIL_ID = "versement-detail";
 /** "Versements": sums paid out by the manager on each management contract, with their proof. */
 export function Versements() {
   const { data } = useVersementsData();
-  const kpis = useVersementsKpis(data.versements, data.asOf, data.history);
-  const list = useVersementsList(data.versements, data.asOf);
+  const versements = useVersementsInScope(data.versements);
+  const kpis = useVersementsKpis(versements, data.asOf, data.history);
+  const list = useVersementsList(versements, data.asOf);
   const selection = useVersementsSelection(list.results.map((versement) => versement.id));
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -48,6 +51,7 @@ export function Versements() {
         <p className="mt-1 max-w-2xl text-sm text-zinc-500 dark:text-zinc-400">
           Suivez les sommes reversées par le gestionnaire sur chaque contrat de gestion : loyers, cautions et services, avec leur justificatif.
         </p>
+        <WorkspaceScopeNotice className="mt-3" />
       </header>
 
       <VersementsKpi kpis={kpis} />

@@ -14,3 +14,4 @@ export {
 export type { UseProprietairesListResult } from "./use_proprietaires_list";
 export { useProprietairesSelection } from "./use_proprietaires_selection";
 export type { UseProprietairesSelectionResult } from "./use_proprietaires_selection";
+export { useProprietairesInScope } from "./use_proprietaires_scope";

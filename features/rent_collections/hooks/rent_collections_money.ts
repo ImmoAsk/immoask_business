@@ -35,7 +35,7 @@ const chargeShort = { eau: "eau", electricite: "élec.", entretien: "entretien" 
 
 /**
  * What the payment covers, as in the table:
- * "Loyer janvier 2025", "Loyer + charges élec.", "Caution (3 mois) + loyer".
+ * "Loyer novembre 2026", "Loyer + charges élec.", "Caution (3 mois) + loyer".
  */
 export function natureLabel(collection: RentCollection) {
   const [first, ...rest] = collection.lines;

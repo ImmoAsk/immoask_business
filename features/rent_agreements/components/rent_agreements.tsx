@@ -1,10 +1,12 @@
 "use client";
 
+import { WorkspaceScopeNotice } from "@/features/workspace/components";
 import { useRef, useState } from "react";
 import { terminationEffectiveDate } from "../hooks/rent_agreements_status";
 import { useRentAgreementsData } from "../hooks/use_rent_agreements_data";
 import { useRentAgreementsKpis } from "../hooks/use_rent_agreements_kpis";
 import { useRentAgreementsList } from "../hooks/use_rent_agreements_list";
+import { useRentAgreementsInScope } from "../hooks/use_rent_agreements_scope";
 import { useRentAgreementsSelection } from "../hooks/use_rent_agreements_selection";
 import { useRentAgreementsStore } from "../hooks/use_rent_agreements_store";
 import type { RentAgreement } from "../types";
@@ -20,8 +22,9 @@ const DETAIL_ID = "rent-agreement-detail";
 export function RentAgreements() {
   const { data } = useRentAgreementsData();
   const store = useRentAgreementsStore(data.agreements);
-  const kpis = useRentAgreementsKpis(store.agreements, data.asOf, data.activeHistory);
-  const list = useRentAgreementsList(store.agreements, data.asOf);
+  const agreements = useRentAgreementsInScope(store.agreements);
+  const kpis = useRentAgreementsKpis(agreements, data.asOf, data.activeHistory);
+  const list = useRentAgreementsList(agreements, data.asOf);
   const selection = useRentAgreementsSelection(list.results.map((agreement) => agreement.id));
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -53,6 +56,7 @@ export function RentAgreements() {
         <p className="mt-1 max-w-2xl text-sm text-zinc-500 dark:text-zinc-400">
           Chaque location s&apos;appuie sur un contrat de gestion et un bien : suivez les loyers, les cautions et les échéances.
         </p>
+        <WorkspaceScopeNotice className="mt-3" />
       </header>
 
       <RentAgreementsKpi kpis={kpis} onShowFinished={() => list.setTab("termine")} onShowUpcoming={() => list.setTab("a_venir")} />

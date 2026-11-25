@@ -1,10 +1,12 @@
 "use client";
 
+import { WorkspaceScopeNotice } from "@/features/workspace/components";
 import { useRef, useState } from "react";
 import { nextStatus } from "../hooks/reservations_stay";
 import { useReservationsData } from "../hooks/use_reservations_data";
 import { useReservationsKpis } from "../hooks/use_reservations_kpis";
 import { useReservationsList } from "../hooks/use_reservations_list";
+import { useReservationsInScope } from "../hooks/use_reservations_scope";
 import { useReservationsSelection } from "../hooks/use_reservations_selection";
 import { useReservationsStore } from "../hooks/use_reservations_store";
 import type { Reservation } from "../types";
@@ -19,8 +21,9 @@ const DETAIL_ID = "reservation-detail";
 export function Reservations() {
   const { data } = useReservationsData();
   const store = useReservationsStore(data.reservations);
-  const kpis = useReservationsKpis(store.reservations, data.asOf, data.newHistory);
-  const list = useReservationsList(store.reservations);
+  const reservations = useReservationsInScope(store.reservations);
+  const kpis = useReservationsKpis(reservations, data.asOf, data.newHistory);
+  const list = useReservationsList(reservations);
   const selection = useReservationsSelection(list.results.map((reservation) => reservation.id));
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -51,6 +54,7 @@ export function Reservations() {
         <p className="mt-1 max-w-2xl text-sm text-zinc-500 dark:text-zinc-400">
           Séjours des biens immobiliers meublés : arrivées, départs, lieux de prise en charge et suivi de chaque locataire.
         </p>
+        <WorkspaceScopeNotice className="mt-3" />
       </header>
 
       <ReservationsKpi kpis={kpis} onShowInProgress={() => list.setTab("en_cours")} onShowDone={() => list.setTab("effectuee")} />

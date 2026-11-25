@@ -11,3 +11,4 @@ export { useCalendriersNavigation } from "./use_calendriers_navigation";
 export type { UseCalendriersNavigationResult } from "./use_calendriers_navigation";
 export { useCalendriersPeriods } from "./use_calendriers_periods";
 export type { UseCalendriersPeriodsResult } from "./use_calendriers_periods";
+export { useCalendriersInScope } from "./use_calendriers_scope";

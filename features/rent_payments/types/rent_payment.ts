@@ -6,7 +6,7 @@ export type RentPaymentStatus = "paye" | "partiel" | "a_payer" | "en_retard";
 
 export type RentPayment = {
   id: string;
-  /** "PAY-2025-042" */
+  /** "PAY-2026-042" */
   reference: string;
   /** Month the rent is for, ISO "YYYY-MM". */
   period: string;
@@ -26,6 +26,8 @@ export type RentPayment = {
     /** e.g. "A3" */
     lot?: string;
   };
+  /** Management contract the property is under; the header's contract narrows the list to it. */
+  management: { reference: string };
   /** Monthly rent due, FCFA. */
   rent: number;
   /** Received so far for this month, FCFA. */

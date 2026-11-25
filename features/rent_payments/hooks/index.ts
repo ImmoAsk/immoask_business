@@ -11,3 +11,4 @@ export {
   useRentPaymentsList,
 } from "./use_rent_payments_list";
 export type { UseRentPaymentsListResult } from "./use_rent_payments_list";
+export { useRentPaymentsInScope } from "./use_rent_payments_scope";

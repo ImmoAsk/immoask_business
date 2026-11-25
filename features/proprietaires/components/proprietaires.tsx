@@ -1,11 +1,13 @@
 "use client";
 
+import { WorkspaceScopeNotice } from "@/features/workspace/components";
 import { useState } from "react";
 import { cn } from "@/lib/cn";
 import { isMandateEndingSoon } from "../hooks/proprietaires_dates";
 import { useProprietairesData } from "../hooks/use_proprietaires_data";
 import { useProprietairesKpis } from "../hooks/use_proprietaires_kpis";
 import { DEFAULT_PROPRIETAIRE_FILTERS, useProprietairesList } from "../hooks/use_proprietaires_list";
+import { useProprietairesInScope } from "../hooks/use_proprietaires_scope";
 import { useProprietairesSelection } from "../hooks/use_proprietaires_selection";
 import type { ProprietaireQuickFilter, ProprietaireView } from "../types";
 import { ProprietairesCard } from "./proprietaires_card";
@@ -20,15 +22,16 @@ import { ProprietairesTable } from "./proprietaires_table";
 /** Owners page: KPIs, search & filters, then a table or a list beside a map of their properties. */
 export function Proprietaires() {
   const { data } = useProprietairesData();
-  const kpis = useProprietairesKpis(data.proprietaires, data.asOf, data.ownersHistory);
-  const list = useProprietairesList(data.proprietaires, data.asOf);
+  const { proprietaires, ownersHistory } = useProprietairesInScope(data);
+  const kpis = useProprietairesKpis(proprietaires, data.asOf, ownersHistory);
+  const list = useProprietairesList(proprietaires, data.asOf);
   const selection = useProprietairesSelection(list.results.map((proprietaire) => proprietaire.id));
   const [view, setView] = useState<ProprietaireView>("tableau");
   /** Selected property on the map; its owner is highlighted in the list. */
   const [selectedBienId, setSelectedBienId] = useState<string | null>(null);
   const [hoveredOwnerId, setHoveredOwnerId] = useState<string | null>(null);
   const selectedOwnerId =
-    data.proprietaires.find((proprietaire) => proprietaire.biens.some((bien) => bien.id === selectedBienId))?.id ?? null;
+    proprietaires.find((proprietaire) => proprietaire.biens.some((bien) => bien.id === selectedBienId))?.id ?? null;
 
   const pagination = {
     page: list.page,
@@ -50,6 +53,7 @@ export function Proprietaires() {
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
           Suivez vos mandants, leurs portefeuilles et leurs reversements.
         </p>
+        <WorkspaceScopeNotice className="mt-3" />
       </header>
 
       <ProprietairesKpi
