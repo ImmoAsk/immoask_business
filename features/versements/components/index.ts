@@ -1,0 +1,10 @@
+export { Versements } from "./versements";
+export { amountText, Attachment, FileTile, MethodLabel, TypeBadge, versementReceipt, versementsExportTable } from "./versements_parts";
+export { VersementsDetail } from "./versements_detail";
+export type { VersementsDetailProps } from "./versements_detail";
+export { VersementsFilters } from "./versements_filters";
+export type { VersementsFiltersProps } from "./versements_filters";
+export { VersementsKpi } from "./versements_kpi";
+export type { VersementsKpiProps } from "./versements_kpi";
+export { VersementsTable } from "./versements_table";
+export type { VersementsTableProps } from "./versements_table";

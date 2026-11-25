@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Calendries } from "@/features/calendries";
+import { Calendriers } from "@/features/calendriers";
 
 export const metadata: Metadata = {
   title: "Calendrier de disponibilité — ImmoAsk Business",
 };
 
 export default function CalendriersPage() {
-  return <Calendries />;
+  return <Calendriers />;
 }
