@@ -268,6 +268,11 @@ const paths = {
       <path d="M13.5 3.6a8.5 8.5 0 0 1 6.9 6.9h-6.9z" />
     </>
   ),
+  check: <path d="m5 12.5 4.5 4.5L19 7.5" />,
+  droplet: <path d="M12 3c3 4.2 6 7.2 6 10.5a6 6 0 0 1-12 0C6 10.2 9 7.2 12 3z" />,
+  bolt: <path d="M13 2.5 4.5 14H11l-1 7.5L18.5 10H12z" />,
+  snowflake: <path d="M12 2.5v19M4.2 7l15.6 10M4.2 17 19.8 7M9 3.8l3 2.4 3-2.4M9 20.2l3-2.4 3 2.4" />,
+  paintRoller: <path d="M5 4h12v5H5zM17 6.5h2v4h-7v3M10.5 13.5h3v7h-3z" />,
   message: <path d="M4.5 5.5h15a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1H10l-4.5 3.5V17h-1a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1zM8 10h8M8 13h5" />,
 } satisfies Record<string, ReactNode>;
 
