@@ -161,6 +161,7 @@ const paths = {
   moon: <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z" />,
   menu: <path d="M4 6h16M4 12h16M4 18h16" />,
   close: <path d="M6 6l12 12M18 6L6 18" />,
+  logOut: <path d="M14 4h4.5a1.5 1.5 0 0 1 1.5 1.5v13a1.5 1.5 0 0 1-1.5 1.5H14M10 16l-4-4 4-4M6 12h10" />,
   moreVertical: (
     <>
       <circle cx="12" cy="5.5" r="1" />

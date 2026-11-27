@@ -1,3 +1,4 @@
+export { AuthGuard } from "./auth_guard";
 export { LoginBrandPanel } from "./login_brand_panel";
 export { LoginForm } from "./login_form";
 export type { LoginFormProps } from "./login_form";

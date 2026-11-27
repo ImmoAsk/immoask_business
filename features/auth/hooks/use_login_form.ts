@@ -1,8 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { loginWithPassword } from "@/lib/auth/login";
+import { DEFAULT_AFTER_LOGIN, returnPathFromLocation } from "@/lib/auth/redirect";
+import { getSession } from "@/lib/auth/session";
 import type { LoginCredentials, LoginField, LoginFieldErrors, LoginStatus } from "../types";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -21,17 +23,22 @@ const errorMessages = {
 } as const;
 
 export type UseLoginFormOptions = {
-  /** Where to go after a successful sign-in. */
+  /** Where to go after a successful sign-in, unless the URL has a valid `?next=` back-office page. */
   redirectTo?: string;
 };
 
 /** State, validation and submission for the email/password sign-in form. */
-export function useLoginForm({ redirectTo = "/app/dashboard" }: UseLoginFormOptions = {}) {
+export function useLoginForm({ redirectTo = DEFAULT_AFTER_LOGIN }: UseLoginFormOptions = {}) {
   const router = useRouter();
   const [values, setValues] = useState<LoginCredentials>({ email: "", password: "", remember: true });
   const [fieldErrors, setFieldErrors] = useState<LoginFieldErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [status, setStatus] = useState<LoginStatus>("idle");
+
+  // A valid session is already stored in this browser: skip the form.
+  useEffect(() => {
+    if (getSession()) router.replace(returnPathFromLocation(redirectTo));
+  }, [router, redirectTo]);
 
   function setField<K extends keyof LoginCredentials>(field: K, value: LoginCredentials[K]) {
     setValues((current) => ({ ...current, [field]: value }));
@@ -60,7 +67,7 @@ export function useLoginForm({ redirectTo = "/app/dashboard" }: UseLoginFormOpti
       const result = await loginWithPassword({ ...values, email: values.email.trim() });
       if (result.ok) {
         setStatus("success");
-        router.replace(redirectTo);
+        router.replace(returnPathFromLocation(redirectTo));
         return;
       }
       setFormError(errorMessages[result.error]);

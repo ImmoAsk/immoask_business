@@ -10,5 +10,7 @@ export const mockDemoUser: AuthUser = {
   id: "usr_demo",
   email: mockDemoAccount.email,
   fullName: "Kossi Adanou",
-  role: "proprietaire",
+  phone: null,
+  avatar: null,
+  role: { id: "role_demo", code: "proprietaire", name: "Propriétaire" },
 };

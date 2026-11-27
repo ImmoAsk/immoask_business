@@ -1,34 +1,59 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { AppShell, type AppShellProps } from "@/components/layout";
+import { useState, type ReactNode } from "react";
+import { AppShell, type AppShellProps, type SidebarUser } from "@/components/layout";
+import { AuthGuard } from "@/features/auth/components/auth_guard";
+import { useSession } from "@/features/auth/hooks/use_session";
+import { avatarUrl } from "@/lib/api/config";
+import { logout } from "@/lib/auth/login";
 import { useWorkspace } from "../hooks/workspace_context";
 import { WORKSPACE_ALL } from "../types";
 import { WorkspaceProvider } from "./workspace_provider";
 
 export type WorkspaceShellProps = {
-  sidebar: AppShellProps["sidebar"];
+  /** Sidebar settings; the user and logout come from the stored session. */
+  sidebar: Omit<AppShellProps["sidebar"], "user" | "onLogout">;
   /** Header settings other than the contract and period selectors, which this shell fills in. */
   header?: Omit<NonNullable<AppShellProps["header"]>, "contract" | "period">;
   children: ReactNode;
 };
 
-/** The back-office frame, with the header's contract and period wired to the shared selection. */
+/**
+ * The back-office frame, with the header's contract and period wired to the shared selection.
+ * Only rendered for a signed-in user: others are sent to /login.
+ */
 export function WorkspaceShell(props: WorkspaceShellProps) {
   return (
-    <WorkspaceProvider>
-      <ConnectedShell {...props} />
-    </WorkspaceProvider>
+    <AuthGuard>
+      <WorkspaceProvider>
+        <ConnectedShell {...props} />
+      </WorkspaceProvider>
+    </AuthGuard>
   );
 }
 
+const signedOutUser: SidebarUser = { name: "", role: "" };
+
 function ConnectedShell({ sidebar, header, children }: WorkspaceShellProps) {
   const workspace = useWorkspace();
+  const session = useSession();
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  const user: SidebarUser = session
+    ? { name: session.user.fullName, role: session.user.role?.name ?? "", avatarUrl: avatarUrl(session.user.avatar) }
+    : signedOutUser;
+
+  async function handleLogout() {
+    if (loggingOut) return;
+    setLoggingOut(true);
+    // Clearing the session makes AuthGuard send the user to /login.
+    await logout();
+  }
   const loadingLabel = workspace.isLoading ? "Chargement…" : null;
 
   return (
     <AppShell
-      sidebar={sidebar}
+      sidebar={{ ...sidebar, user, onLogout: handleLogout }}
       header={{
         ...header,
         contract: {
