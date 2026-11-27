@@ -14,7 +14,8 @@ export type RentAgreement = {
   id: string;
   /** "CL-2026-0001" */
   reference: string;
-  management: { reference: string; owner: string };
+  /** `label`: "Immeuble Ave Maria : Contrat de gestion No. CG-2026-0001 entre … et …" */
+  management: { reference: string; owner: string; label: string };
   /** "Appartement A1 · Résidence Les Palmiers" */
   property: string;
   type: RentAgreementType;

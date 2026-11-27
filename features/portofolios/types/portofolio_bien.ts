@@ -39,7 +39,8 @@ export type PortofolioBien = {
     /** Administrative zone, e.g. "Golfe 5". */
     zone: string;
   };
-  coordinates: PortofolioCoordinates;
+  /** Null when the backend has no position: the property is left off the map. */
+  coordinates: PortofolioCoordinates | null;
   /** Up to three short lines (rooms, surface, a highlight). */
   features: PortofolioBienFeature[];
   status: PortofolioBienStatus;
@@ -48,8 +49,12 @@ export type PortofolioBien = {
   /** Rentable units ("lots"): 1 for a house, 4 for a building with 4 leases. */
   units: { total: number; occupied: number };
   occupant: PortofolioOccupant;
-  /** Monthly rent in FCFA (asking rent when vacant). */
+  /** Monthly rent in FCFA (asking rent when vacant); 0 for a property for sale. */
   rent: number;
+  /** For sale ("à vendre") rather than for rent: the price column shows `salePrice`. */
+  forSale?: boolean;
+  /** Sale price in FCFA. */
+  salePrice?: number;
   /** Line under the rent, e.g. "Total 4 lots". */
   rentNote?: string;
   payment?: PortofolioPaymentState;

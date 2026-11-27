@@ -39,7 +39,7 @@ export function useRentAgreementsList(agreements: RentAgreement[], asOf: string)
   const terms = normalize(query).split(/\s+/).filter(Boolean);
   // Tab counts follow the search and filters, so each tab says what clicking it shows.
   const base = agreements.filter((agreement) => {
-    const text = normalize(`${agreement.reference} ${agreement.tenant} ${agreement.property} ${agreement.management.reference}`);
+    const text = normalize(`${agreement.reference} ${agreement.tenant} ${agreement.property} ${agreement.management.reference} ${agreement.management.label}`);
     return terms.every((term) => text.includes(term)) && matchesFilters(agreement, filters);
   });
   const results = base.filter((agreement) => tab === "tous" || agreementStatus(agreement, asOf) === tab);
@@ -59,7 +59,10 @@ export function useRentAgreementsList(agreements: RentAgreement[], asOf: string)
       (key) => filters[key] !== DEFAULT_RENT_AGREEMENT_FILTERS[key],
     ).length,
     resetFilters: () => setFilters(DEFAULT_RENT_AGREEMENT_FILTERS),
-    managementRefs: uniqueSorted(agreements.map((agreement) => agreement.management.reference)),
+    /** Filter options: the contract reference as value, its full label as text. */
+    managementRefs: [...new Map(agreements.map((agreement) => [agreement.management.reference, agreement.management.label])).entries()]
+      .sort(([, a], [, b]) => a.localeCompare(b, "fr"))
+      .map(([value, label]) => ({ value, label })),
     tenants: uniqueSorted(agreements.map((agreement) => agreement.tenant)),
     results,
   };

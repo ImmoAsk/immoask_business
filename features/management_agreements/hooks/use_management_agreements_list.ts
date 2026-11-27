@@ -43,7 +43,7 @@ export function useManagementAgreementsList(agreements: ManagementAgreement[]) {
   const terms = normalize(query).split(/\s+/).filter(Boolean);
   // Tab counts follow the search and filters, so each tab says what clicking it shows.
   const base = agreements.filter((agreement) => {
-    const text = normalize(`${agreement.reference} ${agreement.owner.name} ${agreement.manager} ${agreement.building}`);
+    const text = normalize(`${agreement.reference} ${agreement.label} ${agreement.owner.name} ${agreement.manager} ${agreement.building}`);
     return terms.every((term) => text.includes(term)) && matchesFilters(agreement, filters);
   });
   const results = base.filter((agreement) => tab === "tous" || agreement.status === tab);

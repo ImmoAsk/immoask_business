@@ -71,8 +71,7 @@ export function RentAgreementsDetail({ agreement, asOf, onTerminate, className }
         <dl className="grid grid-cols-2 gap-x-4 gap-y-4">
           <div className="min-w-0">
             <dt className={fieldLabel}>Contrat de gestion</dt>
-            <dd className="mt-1 text-sm font-bold text-brand-700 tabular-nums dark:text-brand-100">{agreement.management.reference}</dd>
-            <dd className="text-xs text-zinc-500 dark:text-zinc-400">{agreement.management.owner}</dd>
+            <dd className="mt-1 text-sm leading-snug font-bold text-brand-700 dark:text-brand-100">{agreement.management.label}</dd>
           </div>
           <div className="min-w-0">
             <dt className={fieldLabel}>Propriété</dt>

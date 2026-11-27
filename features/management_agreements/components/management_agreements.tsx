@@ -9,7 +9,7 @@ import { DEFAULT_MANAGEMENT_FILTERS, useManagementAgreementsList } from "../hook
 import { useManagementAgreementsInScope } from "../hooks/use_management_agreements_scope";
 import { useManagementAgreementsSelection } from "../hooks/use_management_agreements_selection";
 import { useManagementAgreementsStore } from "../hooks/use_management_agreements_store";
-import type { ManagementAgreement } from "../types";
+import type { ManagementAgreement, ManagementAgreementsData } from "../types";
 import { ManagementAgreementsDetail } from "./management_agreements_detail";
 import { AssignBienDialog, TerminateDialog } from "./management_agreements_dialogs";
 import { ManagementAgreementsFilters } from "./management_agreements_filters";
@@ -20,7 +20,21 @@ const DETAIL_ID = "management-agreement-detail";
 
 /** "Contrats de gestion": mandates signed with owners, their remuneration and properties. */
 export function ManagementAgreements() {
-  const { data } = useManagementAgreementsData();
+  const { data, isLoading, error, isLoadingAvailable } = useManagementAgreementsData();
+  if (!data) {
+    return (
+      <div className="mx-auto max-w-[1400px]">
+        <h1 className="text-2xl font-bold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50">Contrats de gestion</h1>
+        <p role="status" className="mt-4 text-sm text-zinc-500 dark:text-zinc-400">
+          {isLoading ? "Chargement des contrats…" : `Contrats indisponibles${error ? ` : ${error}` : ""}`}
+        </p>
+      </div>
+    );
+  }
+  return <ManagementAgreementsLoaded data={data} isLoadingAvailable={isLoadingAvailable} />;
+}
+
+function ManagementAgreementsLoaded({ data, isLoadingAvailable }: { data: ManagementAgreementsData; isLoadingAvailable: boolean }) {
   const store = useManagementAgreementsStore(data.agreements, data.availableBiens);
   const agreements = useManagementAgreementsInScope(store.agreements);
   const kpis = useManagementAgreementsKpis(agreements, data.activeHistory);
@@ -84,6 +98,7 @@ export function ManagementAgreements() {
       <AssignBienDialog
         agreement={selected}
         available={store.available}
+        isLoadingAvailable={isLoadingAvailable}
         open={dialog === "assign"}
         onOpenChange={(open) => setDialog(open ? "assign" : null)}
         onConfirm={(bien) => {

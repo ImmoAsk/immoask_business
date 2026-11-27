@@ -33,14 +33,21 @@ export type PortofoliosMapsProps = {
 
 /** Properties on the shared Lomé map, coloured by status. */
 export function PortofoliosMaps({ biens, selectedId, onSelect, highlightedId, onOpen, className }: PortofoliosMapsProps) {
-  const markers: MapMarker[] = biens.map((bien) => ({
-    id: bien.id,
-    coordinates: bien.coordinates,
-    label: `${bien.title} — ${statusLabel(bien)} — ${formatAmount(bien.rent)} FCFA par mois`,
-    place: bien.location.city,
-    tone: tones[bien.status],
-    icon: bien.status === "en_travaux" ? "wrench" : "home",
-  }));
+  // Properties without a position are left off the map.
+  const markers: MapMarker[] = biens.flatMap((bien) =>
+    bien.coordinates
+      ? [
+          {
+            id: bien.id,
+            coordinates: bien.coordinates,
+            label: `${bien.title} — ${statusLabel(bien)} — ${formatAmount(bien.rent)} FCFA par mois`,
+            place: bien.location.city,
+            tone: tones[bien.status],
+            icon: bien.status === "en_travaux" ? ("wrench" as const) : ("home" as const),
+          },
+        ]
+      : [],
+  );
 
   return (
     <LomeMap

@@ -123,9 +123,9 @@ export function ManagementAgreementsTable({ results, selectedId, onSelect, selec
                             event.stopPropagation();
                             onSelect(agreement);
                           }}
-                          className={cn("rounded font-bold whitespace-nowrap text-brand-700 tabular-nums hover:underline dark:text-brand-100", focusRing)}
+                          className={cn("rounded text-left leading-snug font-bold text-brand-700 hover:underline dark:text-brand-100", focusRing)}
                         >
-                          {agreement.reference}
+                          {agreement.label}
                         </button>
                       </td>
                       <td className="px-3 py-3.5">
@@ -183,7 +183,7 @@ export function ManagementAgreementsTable({ results, selectedId, onSelect, selec
                     <span className="min-w-0 flex-1">
                       <span className="block truncate font-semibold text-zinc-950 dark:text-zinc-50">{agreement.owner.name}</span>
                       <span className="block truncate text-xs text-zinc-500 dark:text-zinc-400">
-                        <span className="font-semibold text-brand-700 dark:text-brand-100">{agreement.reference}</span> ·{" "}
+                        <span className="font-semibold text-brand-700 dark:text-brand-100">{agreement.label}</span> ·{" "}
                         {remunerationShort(agreement.remuneration)} · {agreement.biensCount} bien{agreement.biensCount > 1 ? "s" : ""}
                       </span>
                     </span>
@@ -222,7 +222,7 @@ export function managementAgreementsExportTable(agreements: ManagementAgreement[
     rows: agreements.map((agreement) => {
       const detail = remunerationDetail(agreement.remuneration);
       return [
-        agreement.reference,
+        agreement.label,
         agreement.owner.name,
         ownerKindLabel(agreement),
         agreement.manager,

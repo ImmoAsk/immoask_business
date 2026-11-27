@@ -71,7 +71,7 @@ export function PortofoliosLocation({ bien }: { bien: PortofolioBien }) {
         <p className="font-medium text-zinc-900 dark:text-zinc-100">
           {bien.location.quartier}, {bien.location.city}
         </p>
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">{bien.location.zone}</p>
+        {bien.location.zone ? <p className="text-xs text-zinc-500 dark:text-zinc-400">{bien.location.zone}</p> : null}
       </div>
     </div>
   );
@@ -130,8 +130,8 @@ export function PortofoliosRent({ bien, compact = false }: { bien: PortofolioBie
   return (
     <div className={cn("flex flex-col", compact ? "items-end gap-0.5 text-right" : "gap-1")}>
       <p className="leading-tight font-bold whitespace-nowrap text-zinc-950 tabular-nums dark:text-zinc-50">
-        {formatAmount(bien.rent)}
-        <span className="block text-xs font-medium text-zinc-500 dark:text-zinc-400">FCFA / mois</span>
+        {formatAmount(bien.forSale ? (bien.salePrice ?? 0) : bien.rent)}
+        <span className="block text-xs font-medium text-zinc-500 dark:text-zinc-400">{bien.forSale ? "FCFA · prix de vente" : "FCFA / mois"}</span>
       </p>
       {bien.rentNote ? <span className="text-xs text-zinc-500 dark:text-zinc-400">{bien.rentNote}</span> : null}
       {payment && bien.status === "loue" ? (

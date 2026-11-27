@@ -1,8 +1,9 @@
+import { managementAgreementLabel } from "@/features/management_agreements/hooks/management_agreement_label";
 import type { ManagementAgreement, ManagementAgreementsData } from "@/features/management_agreements/types";
 
 // Placeholder mandates until lib/api/contrats-gestion is wired. Names and bank details are fictitious.
 
-const agreements: ManagementAgreement[] = [
+const mandates: Omit<ManagementAgreement, "label">[] = [
   {
     id: "cg_0001",
     reference: "CG-2026-0001",
@@ -133,6 +134,16 @@ const agreements: ManagementAgreement[] = [
     assigned: [],
   },
 ];
+
+const agreements: ManagementAgreement[] = mandates.map((agreement) => ({
+  ...agreement,
+  label: managementAgreementLabel({
+    building: agreement.building.split(" · ")[0],
+    number: agreement.reference,
+    owner: agreement.owner.name,
+    manager: agreement.manager,
+  }),
+}));
 
 export const mockManagementAgreements: ManagementAgreementsData = {
   asOf: "2026-11-24",

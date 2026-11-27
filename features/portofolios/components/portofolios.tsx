@@ -8,7 +8,7 @@ import { usePortofolioKpis } from "../hooks/use_portofolio_kpis";
 import { DEFAULT_PORTOFOLIO_FILTERS, usePortofolioList } from "../hooks/use_portofolio_list";
 import { usePortofolioInScope } from "../hooks/use_portofolio_scope";
 import { usePortofolioSelection } from "../hooks/use_portofolio_selection";
-import type { PortofolioView } from "../types";
+import type { PortofolioData, PortofolioView } from "../types";
 import { PortofoliosAdvancedSearch } from "./portofolios_advanced_search";
 import { PortofoliosBienCard } from "./portofolios_bien_card";
 import { PortofoliosKpi } from "./portofolios_kpi";
@@ -17,10 +17,12 @@ import { PortofoliosPagination } from "./portofolios_pagination";
 import { PortofoliosTableau } from "./portofolios_tableau";
 import { portofolioPanel } from "./portofolios_styles";
 
+const EMPTY: PortofolioData = { biens: [], revenueHistory: [] };
+
 /** Portfolio page: KPIs, search & filters, then a table or a list beside a map. */
 export function Portofolios() {
-  const { data } = usePortofolioData();
-  const { biens, revenueHistory } = usePortofolioInScope(data);
+  const { data, isLoading, error } = usePortofolioData();
+  const { biens, revenueHistory } = usePortofolioInScope(data ?? EMPTY);
   const kpis = usePortofolioKpis(biens, revenueHistory);
   const list = usePortofolioList(biens);
   const selection = usePortofolioSelection(list.results.map((bien) => bien.id));
@@ -44,6 +46,11 @@ export function Portofolios() {
           Vos biens, leur occupation et leurs loyers en un coup d&apos;œil.
         </p>
         <WorkspaceScopeNotice className="mt-3" />
+        {data ? null : (
+          <p role="status" className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
+            {isLoading ? "Chargement des biens…" : `Biens indisponibles${error ? ` : ${error}` : ""}`}
+          </p>
+        )}
       </header>
 
       <PortofoliosKpi

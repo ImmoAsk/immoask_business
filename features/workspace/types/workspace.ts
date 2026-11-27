@@ -8,6 +8,8 @@ export type WorkspaceContract = {
   id: string;
   /** "CG-2026-0001" */
   reference: string;
+  /** "Immeuble Ave Maria : Contrat de gestion No. CG-2026-0001 entre … et …" */
+  label: string;
   owner: string;
   /** "Résidence Les Palmiers · Tokoin, Lomé" */
   building: string;

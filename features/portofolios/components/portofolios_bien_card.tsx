@@ -57,7 +57,9 @@ export function PortofoliosBienCard({ bien, selected, onSelect, onHover, onActio
           <Icon name="mapPin" className="size-4 shrink-0 text-zinc-400" />
           <span className="truncate">
             {bien.location.quartier}, {bien.location.city}
-            <span className="text-zinc-400"> • {bien.location.zone}</span>
+            {bien.location.zone ? (
+              <span className="text-zinc-400"> • {bien.location.zone}</span>
+            ) : null}
           </span>
         </p>
         <div className="hidden sm:block">

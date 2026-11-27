@@ -12,7 +12,7 @@ export type LoginFieldErrors = Partial<Record<LoginField, string>>;
 export type AuthRole = {
   id: string;
   /** Backend role code (e.g. used for permissions). */
-  code: string | null;
+  code: number | null;
   name: string | null;
 };
 

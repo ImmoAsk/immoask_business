@@ -1,9 +1,9 @@
 import type { AuthUser, LoginCredentials, LoginResult } from "@/features/auth/types";
-import { loginAccount, logoutAccount, type ApiUser } from "@/lib/api/accounts/accounts.services";
+import { loginAccount, logoutAccount, type LoginUser } from "@/lib/api/accounts/accounts.services";
 import { GraphQLRequestError } from "@/lib/api/graphql_client";
 import { clearSession, saveSession } from "./session";
 
-function toAuthUser(user: ApiUser): AuthUser {
+function toAuthUser(user: LoginUser): AuthUser {
   return {
     id: user.id,
     email: user.email ?? null,

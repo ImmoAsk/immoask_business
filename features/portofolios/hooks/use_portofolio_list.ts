@@ -63,6 +63,8 @@ export function filterPortofolio(biens: PortofolioBien[], query: string, filters
     if (filters.type !== "tous" && bien.type !== filters.type) return false;
     if (filters.city !== "toutes" && bien.location.city !== filters.city) return false;
     if (filters.status !== "tous" && !matchesStatus(bien, filters.status)) return false;
+    // Price ranges are monthly rents: a property for sale (no rent) only shows under "toutes".
+    if (filters.price !== "toutes" && bien.forSale) return false;
     if (bien.rent < min || bien.rent >= max) return false;
     if (terms.length === 0) return true;
     const text = searchText(bien);

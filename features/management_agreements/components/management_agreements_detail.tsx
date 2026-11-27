@@ -58,8 +58,8 @@ export function ManagementAgreementsDetail({ agreement, onAssign, onTerminate, c
             {ownerInitials(agreement.owner.name)}
           </span>
           <div className="min-w-0">
-            <h2 id="management-detail-title" className="text-[22px] leading-tight font-bold tracking-tight tabular-nums">
-              {agreement.reference}
+            <h2 id="management-detail-title" className="text-lg leading-snug font-bold tracking-tight">
+              {agreement.label}
             </h2>
             <p className="mt-0.5 truncate text-[13px] text-brand-100">{agreement.owner.name}</p>
           </div>
@@ -107,7 +107,7 @@ export function ManagementAgreementsDetail({ agreement, onAssign, onTerminate, c
             </button>
           </div>
           <p className="mt-1 font-mono text-sm font-semibold tracking-wide break-all text-zinc-900 dark:text-zinc-100">
-            {ibanShown ? agreement.payout.iban : maskIban(agreement.payout.iban)}
+            {!agreement.payout.iban ? "—" : ibanShown ? agreement.payout.iban : maskIban(agreement.payout.iban)}
           </p>
           <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{agreement.payout.bank}</p>
         </div>

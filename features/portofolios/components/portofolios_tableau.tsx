@@ -204,7 +204,7 @@ function EmptyState() {
 export function portofolioExportTable(biens: PortofolioBien[]): ExportTable {
   return {
     title: "Patrimoine ImmoAsk",
-    header: ["Référence", "Bien", "Quartier", "Ville", "Zone", "Statut", "Occupant", "Loyer (FCFA/mois)"],
+    header: ["Référence", "Bien", "Quartier", "Ville", "Zone", "Statut", "Occupant", "Loyer (FCFA/mois)", "Prix de vente (FCFA)"],
     rows: biens.map((bien) => [
       bien.reference,
       bien.title,
@@ -213,7 +213,8 @@ export function portofolioExportTable(biens: PortofolioBien[]): ExportTable {
       bien.location.zone,
       statusLabel(bien),
       bien.occupant.kind === "locataire" ? bien.occupant.name : bien.occupant.label,
-      bien.rent,
+      bien.forSale ? "" : bien.rent,
+      bien.forSale ? (bien.salePrice ?? 0) : "",
     ]),
   };
 }

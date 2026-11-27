@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { Icon } from "@/components/ui/icon";
 import type { IconName } from "@/components/ui/icon";
 import { cn } from "@/lib/cn";
@@ -47,9 +50,11 @@ export type PropertyThumbnailProps = {
   className?: string;
 };
 
-/** Property photo, or a tinted tile with the kind's icon when there is none. */
+/** Property photo, or a tinted tile with the kind's icon when there is none (or it fails to load). */
 export function PropertyThumbnail({ kind, photoUrl, compact = false, className }: PropertyThumbnailProps) {
   const meta = propertyKinds[kind];
+  const [failedUrl, setFailedUrl] = useState<string | null>(null);
+  const photo = photoUrl && photoUrl !== failedUrl ? photoUrl : null;
   return (
     <div
       className={cn(
@@ -58,8 +63,8 @@ export function PropertyThumbnail({ kind, photoUrl, compact = false, className }
         className,
       )}
     >
-      {photoUrl ? (
-        <Image src={photoUrl} alt="" fill sizes="144px" className="object-cover" />
+      {photo ? (
+        <Image src={photo} alt="" fill sizes="144px" className="object-cover" onError={() => setFailedUrl(photo)} />
       ) : (
         <>
           <Icon name={meta.icon} className={cn("opacity-80", compact ? "size-5" : "size-7")} />

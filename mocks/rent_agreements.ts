@@ -1,9 +1,17 @@
-import type { RentAgreement, RentAgreementsData } from "@/features/rent_agreements/types";
+import type {
+  RentAgreement,
+  RentAgreementsData,
+} from "@/features/rent_agreements/types";
+import { mockManagementAgreements } from "./management_agreements";
 
 // Placeholder leases until lib/api/contrats-location is wired. Each one points at a management
 // agreement from mocks/management_agreements.ts. Names are fictitious.
 
-const agreements: RentAgreement[] = [
+type MockLease = Omit<RentAgreement, "management"> & {
+  management: Omit<RentAgreement["management"], "label">;
+};
+
+const leases: MockLease[] = [
   {
     id: "cl_0001",
     reference: "CL-2026-0001",
@@ -106,6 +114,17 @@ const agreements: RentAgreement[] = [
     deposit: { mode: "montant", amount: 100_000 },
   },
 ];
+
+const agreements: RentAgreement[] = leases.map((lease) => ({
+  ...lease,
+  management: {
+    ...lease.management,
+    label:
+      mockManagementAgreements.agreements.find(
+        (agreement) => agreement.reference === lease.management.reference,
+      )?.label ?? lease.management.reference,
+  },
+}));
 
 export const mockRentAgreements: RentAgreementsData = {
   asOf: "2026-11-24",

@@ -61,7 +61,7 @@ function ConnectedShell({ sidebar, header, children }: WorkspaceShellProps) {
           value: workspace.selection.contract,
           options: [
             { value: WORKSPACE_ALL, label: loadingLabel ?? (workspace.error ? "Contrats indisponibles" : "Tous les contrats") },
-            ...workspace.contracts.map((contract) => ({ value: contract.reference, label: `${contract.reference} · ${contract.owner}` })),
+            ...workspace.contracts.map((contract) => ({ value: contract.reference, label: contract.label })),
           ],
           disabled: workspace.isLoading || workspace.contracts.length === 0,
           onChange: workspace.setContract,

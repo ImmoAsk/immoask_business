@@ -5,15 +5,16 @@ import type { ManagementAgreement, ManagementAvailableBien, ManagementTerminatio
 
 /**
  * Contracts and unassigned properties, changed by "Affecter un bien" and "Résilier".
- * Kept in memory for now: wire both actions to lib/api/contrats-gestion once the API exists.
+ * `available` follows the loaded list (it may arrive after the contracts), minus the properties assigned here.
+ * Kept in memory for now: wire both actions to the API once the mutations exist.
  */
-export function useManagementAgreementsStore(initial: ManagementAgreement[], initialAvailable: ManagementAvailableBien[]) {
+export function useManagementAgreementsStore(initial: ManagementAgreement[], loadedAvailable: ManagementAvailableBien[]) {
   const [agreements, setAgreements] = useState(initial);
-  const [available, setAvailable] = useState(initialAvailable);
+  const [assignedIds, setAssignedIds] = useState<ReadonlySet<string>>(() => new Set());
 
   return {
     agreements,
-    available,
+    available: loadedAvailable.filter((bien) => !assignedIds.has(bien.id)),
     /** A property joins the contract and leaves the unassigned list. */
     assign: (agreementId: string, bien: ManagementAvailableBien) => {
       setAgreements((previous) =>
@@ -27,7 +28,7 @@ export function useManagementAgreementsStore(initial: ManagementAgreement[], ini
             : agreement,
         ),
       );
-      setAvailable((previous) => previous.filter((item) => item.id !== bien.id));
+      setAssignedIds((previous) => new Set(previous).add(bien.id));
     },
     terminate: (agreementId: string, reason: ManagementTerminationReason, date: string) =>
       setAgreements((previous) =>

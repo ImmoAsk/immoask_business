@@ -11,7 +11,7 @@ export function WorkspaceScopeNotice({ className }: { className?: string }) {
   if (!scope.isFiltered) return null;
 
   const parts = [
-    scope.contract ? `${scope.contract.reference} · ${scope.contract.owner}` : "Tous les contrats",
+    scope.contract ? scope.contract.label : "Tous les contrats",
     scope.period ? scope.period.label : "Toute la période",
   ];
 

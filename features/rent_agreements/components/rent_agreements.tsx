@@ -9,7 +9,7 @@ import { useRentAgreementsList } from "../hooks/use_rent_agreements_list";
 import { useRentAgreementsInScope } from "../hooks/use_rent_agreements_scope";
 import { useRentAgreementsSelection } from "../hooks/use_rent_agreements_selection";
 import { useRentAgreementsStore } from "../hooks/use_rent_agreements_store";
-import type { RentAgreement } from "../types";
+import type { RentAgreement, RentAgreementsData } from "../types";
 import { RentAgreementsDetail } from "./rent_agreements_detail";
 import { RentAgreementsFilters } from "./rent_agreements_filters";
 import { RentAgreementsKpi } from "./rent_agreements_kpi";
@@ -20,7 +20,21 @@ const DETAIL_ID = "rent-agreement-detail";
 
 /** "Contrats de location": leases, each attached to a management agreement and a property. */
 export function RentAgreements() {
-  const { data } = useRentAgreementsData();
+  const { data, isLoading, error } = useRentAgreementsData();
+  if (!data) {
+    return (
+      <div className="mx-auto max-w-[1400px]">
+        <h1 className="text-2xl font-bold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50">Contrats de location</h1>
+        <p role="status" className="mt-4 text-sm text-zinc-500 dark:text-zinc-400">
+          {isLoading ? "Chargement des contrats…" : `Contrats indisponibles${error ? ` : ${error}` : ""}`}
+        </p>
+      </div>
+    );
+  }
+  return <RentAgreementsLoaded data={data} />;
+}
+
+function RentAgreementsLoaded({ data }: { data: RentAgreementsData }) {
   const store = useRentAgreementsStore(data.agreements);
   const agreements = useRentAgreementsInScope(store.agreements);
   const kpis = useRentAgreementsKpis(agreements, data.asOf, data.activeHistory);

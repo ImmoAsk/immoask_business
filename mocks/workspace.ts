@@ -18,6 +18,7 @@ const propertiesByContract: Record<string, string[]> = {
 export const mockWorkspaceContracts: WorkspaceContract[] = mockManagementAgreements.agreements.map((agreement) => ({
   id: agreement.id,
   reference: agreement.reference,
+  label: agreement.label,
   owner: agreement.owner.name,
   building: agreement.building,
   status: agreement.status,

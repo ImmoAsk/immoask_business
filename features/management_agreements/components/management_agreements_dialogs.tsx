@@ -54,13 +54,15 @@ function Choice({
 export type AssignBienDialogProps = {
   agreement: ManagementAgreement | null;
   available: ManagementAvailableBien[];
+  /** The unassigned properties are still loading. */
+  isLoadingAvailable?: boolean;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onConfirm: (bien: ManagementAvailableBien) => void;
 };
 
 /** "Affecter un bien immobilier": pick one of the unassigned properties. */
-export function AssignBienDialog({ agreement, available, open, onOpenChange, onConfirm }: AssignBienDialogProps) {
+export function AssignBienDialog({ agreement, available, isLoadingAvailable = false, open, onOpenChange, onConfirm }: AssignBienDialogProps) {
   const [picked, setPicked] = useState<string | null>(null);
   const bien = available.find((item) => item.id === picked) ?? null;
   const close = (value: boolean) => {
@@ -72,14 +74,14 @@ export function AssignBienDialog({ agreement, available, open, onOpenChange, onC
     <Dialog open={open && agreement !== null} onOpenChange={close} size="md">
       <DialogHeader>
         <DialogTitle className="text-xl font-bold">Affecter un bien immobilier</DialogTitle>
-        <DialogDescription>
-          Contrat {agreement?.reference} · {agreement?.owner.name}
-        </DialogDescription>
+        <DialogDescription>{agreement?.label}</DialogDescription>
       </DialogHeader>
       <fieldset className="mt-5 flex max-h-80 flex-col gap-2 overflow-y-auto">
         <legend className={cn(fieldLabel, "mb-2")}>Biens disponibles, non affectés</legend>
         {available.length === 0 ? (
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">Tous les biens sont déjà affectés à un contrat.</p>
+          <p role="status" className="text-sm text-zinc-500 dark:text-zinc-400">
+            {isLoadingAvailable ? "Chargement des biens…" : "Tous les biens sont déjà affectés à un contrat."}
+          </p>
         ) : (
           available.map((item) => (
             <Choice key={item.id} name="management-assign" checked={picked === item.id} onChange={() => setPicked(item.id)}>

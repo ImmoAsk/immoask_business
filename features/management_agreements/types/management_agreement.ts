@@ -20,6 +20,8 @@ export type ManagementAgreement = {
   id: string;
   /** "CG-2026-0001" */
   reference: string;
+  /** "Immeuble Ave Maria : Contrat de gestion No. CG-2026-0001 entre … et …" (see managementAgreementLabel). */
+  label: string;
   /** Agency staff member in charge. */
   manager: string;
   owner: { name: string; kind: ManagementOwnerKind };

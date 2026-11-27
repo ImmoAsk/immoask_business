@@ -139,7 +139,9 @@ export function RentAgreementsTable({ results, asOf, selectedId, onSelect, selec
                         <span className="block truncate font-semibold text-zinc-950 dark:text-zinc-50" title={agreement.property}>
                           {agreement.property}
                         </span>
-                        <span className="block text-xs text-zinc-500 tabular-nums dark:text-zinc-400">Gestion {agreement.management.reference}</span>
+                        <span className="block truncate text-xs text-zinc-500 dark:text-zinc-400" title={agreement.management.label}>
+                          {agreement.management.label}
+                        </span>
                       </td>
                       <td className="px-3 py-3.5">
                         <span className="flex min-w-0 items-center gap-2.5">
@@ -240,7 +242,7 @@ export function rentAgreementsExportTable(agreements: RentAgreement[], asOf: str
     ],
     rows: agreements.map((agreement) => [
       agreement.reference,
-      agreement.management.reference,
+      agreement.management.label,
       agreement.management.owner,
       agreement.property,
       agreement.tenant,

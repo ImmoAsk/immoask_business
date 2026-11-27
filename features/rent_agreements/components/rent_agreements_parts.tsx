@@ -70,7 +70,7 @@ export function contractSheet(agreement: RentAgreement, asOf: string): ExportTab
     rows: [
       ["Locataire", agreement.tenant],
       ["Propriété", agreement.property],
-      ["Contrat de gestion", `${agreement.management.reference} · ${agreement.management.owner}`],
+      ["Contrat de gestion", agreement.management.label],
       ["Type de contrat", agreementTypes[agreement.type].label],
       ["Montant final", `${amount.value} ${amount.sub}`],
       ["Date de début", formatShortDate(agreement.startDate)],
